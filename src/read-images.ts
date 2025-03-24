@@ -40,7 +40,7 @@ export async function readSfsfImagesByPerson(person: Person): Promise<any[]> {
         photoApi.schema.PHOTO // Assuming this is the field for the photo
     )
     .filter(photoApi.schema.USER_ID.equals(personId))
-    .execute({ destinationName: 'SFSF' });
+    .execute({ destinationName: 'lms-SFCPART001533_BASIC' });
 }
 
 function readRemoteImages<T>(

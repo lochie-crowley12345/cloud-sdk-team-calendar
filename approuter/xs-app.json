@@ -3,13 +3,13 @@
   "routes": [
     {
       "source": "^/odata/v2/TimesheetService/(.*)$",
-      "destination": "svdemo-dest",
+      "destination": "svdemo-dest-internal",
       "authenticationType": "xsuaa",
       "csrfProtection": false
     },
     {
       "source": "^/api/(.*)$",
-      "destination": "svdemo-dest",
+      "destination": "svdemo-dest-internal",
       "authenticationType": "xsuaa",
       "csrfProtection": false
     },

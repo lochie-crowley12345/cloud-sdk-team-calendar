@@ -65,7 +65,7 @@
 					</views>
 
 					<rows>
-						<PlanningCalendarRow icon="{pic}" title="{name}" text="{role}" class="rowHeaderColorRed" nonWorkingDays="" appointments="{path : 'appointments', templateShareable: 'true'}">
+						<PlanningCalendarRow icon="{pic}" title="{name}" text="{sfsfID}" class="rowHeaderColorRed" nonWorkingDays="" appointments="{path : 'appointments', templateShareable: true}">
 <!-- 							enableAppointmentsDragAndDrop="true" appointmentDrop="handleAppointmentDrop"
 							enableAppointmentsResize="true" appointmentResize="handleAppointmentResize" appointmentDragEnter="handleAppointmentDragEnter"> -->
 							<appointments>

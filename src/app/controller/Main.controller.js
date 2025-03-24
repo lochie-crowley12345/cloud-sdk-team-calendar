@@ -136,7 +136,7 @@ sap.ui.define([
       // set message model
         oView.setModel(Messaging.getMessageModel(), "message");
         Messaging.registerObject(oView, true);
-
+      console.log("Next Stop")
       return jQuery.when(
         this.initPersons(model),
         //this.onFetchImages(model),
@@ -152,29 +152,31 @@ sap.ui.define([
         3: "/images/Cameron_Tarry.png",
         4: "/images/Jacob_Chalk.png"
       };
-
       return timeSheetService.getPersons().then(function (persons) {
         var modelData = persons.map(function (person) {
           var personData = {
-            pic: imageMapping[person.ID],
             userid: person.ID,
-            role: person.role,
-            name: person.name
+            name: person.name,
+            email: person.email
           };
-
+          console.log("Person Data: "+ person.userid);
+          console.log("Person Name: "+ person.name);
+          console.log("Person Email: "+ person.email);
           if (typeof model.getProperty("/people/" + person.ID + "/appointments") === "undefined") {
             personData.appointments = [];
           }
 
           return personData;
         });
-
         model.setData({
           people: modelData.reduce(function (objectified, curr) {
+            console.log("Curr: " + curr.name)
+            console.log("Objectified: " + objectified)
             objectified[curr.userid] = curr;
             return objectified;
           }, {})
         }, true);
+        console.log("Model Data: " + model.getProperty("/people" + persons[0].ID))
       });
     },
 
@@ -198,7 +200,7 @@ sap.ui.define([
           if (!groupedAppointments[appointment.person_ID]) {
             groupedAppointments[appointment.person_ID] = { appointments: {} };
           }
-
+          console.log("Reading Appointments")
 //        var temp_appointment = appointments;
         var temp1 = appointment;
         var temp_appointment2 = appointments;
@@ -269,8 +271,8 @@ sap.ui.define([
             title: appointment.type === "AN_1000" ? "Annual Leave" : appointment.type === "WC_PL" ? "Personal Leave": appointment.type === "HOLD" ? appointment.title : appointment.type === "6000"? "Normal Time" : appointment.type === "6001"? "Day Shift" : appointment.type === "6002"? "Fly In": appointment.type === "6003"? "Fly Out": appointment.type,
             info: appointment.info === "Mismatch"? appointment.status : appointment.type === "6000"? "Recorded Working Time" : appointment.type === "6001"? "Planned Working Time": appointment.type === "Onsite Training"? "Recorded Working Time" : appointment.type === "AN_1000" ? "Recorded Working Time" : appointment.type === "WC_PL" ? "Recorded Working Time": appointment.type === "HOLD" ? "Public Holiday" : appointment.info,
             customer: appointment.project,
-            pic: appointment.info === "Mismatch"? "sap-icon://alert" : appointment.type === "AN_1000" ? "sap-icon://general-leave-request" : appointment.type === "WC_PL" ? "sap-icon://general-leave-request": appointment.type === "HOLD" ? "sap-icon://general-leave-request" :appointment.type === "6000"? "sap-icon://time-account": appointment.type === "6001"? "sap-icon://light-mode" : appointment.type === "6002"? "sap-icon://flight": appointment.type === "6003"? "sap-icon://flight": appointment.type === "Onsite Training"? "sap-icon://user-settings" : "",
-            type: appointment.info === "Mismatch"? "Type20" : appointment.type === "AN_1000" ? "Type05" : appointment.type === "WC_PL" ? "Type05" : appointment.type === "HOLD" ? "Type09" : appointment.type === "6000"? "Type02" : appointment.type === "6001"? "Type01" : appointment.type === "6002"? "Type03": appointment.type === "6003"? "Type03": appointment.type === "Onsite Training"? "Type06" : "Type07",
+            pic: appointment.info === "Mismatch"? "sap-icon://alert" : appointment.type === "AN_1000" ? "sap-icon://general-leave-request" : appointment.type === "WC_PL" ? "sap-icon://general-leave-request": appointment.type === "AUS_ANN" ? "sap-icon://general-leave-request" :appointment.type === "WORK"? "sap-icon://time-account": appointment.type === "6001"? "sap-icon://light-mode" : appointment.type === "FLY"? "sap-icon://flight": appointment.type === "6003"? "sap-icon://flight": appointment.type === "EDUC"? "sap-icon://user-settings" : "",
+            type: appointment.info === "Mismatch"? "Type20" : appointment.type === "AUS_ANN" ? "Type05" : appointment.type === "WC_PL" ? "Type05" : appointment.type === "HOLD" ? "Type09" : appointment.type === "WORK"? "Type02" : appointment.type === "6001"? "Type01" : appointment.type === "OVERTIME"? "Type03": appointment.type === "FLY"? "Type03": appointment.type === "EDUC"? "Type06" : "Type07",
             tentative: appointment.type !== "Vacation" && appointment.status !== "APPROVED",
             code: appointment.type
           };
@@ -981,7 +983,6 @@ sap.ui.define([
         oModel.setProperty("/filterBy", sKey);
         oModel.setProperty("/Clone", byPeople);
         this.enableDropdown();
-
         //Reset the TYPES back to SELECT ALL when back in Person view
         var oMultiComboBox = this.byId("rowHeaderFilterTypes");
         var aItems = oModel.getProperty("/filterstype");

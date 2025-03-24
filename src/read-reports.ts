@@ -3,8 +3,6 @@ import { User, pltUserManagementService } from './generated/plt-user-management-
 
 // Define a function to fetch direct reports
 export async function getDirectReports(email: string): Promise<User[]> {
-  // Create an instance of the UserApi
-  //const userApi = new UserApi();
   const { userApi }  = pltUserManagementService();
 
   try {
@@ -15,7 +13,7 @@ export async function getDirectReports(email: string): Promise<User[]> {
       .filter(userApi.schema.EMAIL.equals(email)) // Replace with the actual email field
       .select(userApi.schema.DIRECT_REPORTS) // Include the direct reports field
       //.expand(userApi.schema.DIRECT_REPORTS) // Fetch details of direct reports
-      .execute({ destinationName: 'SFSF' }); // Ensure 'SFSF' destination is configured
+      .execute({ destinationName: 'hcm-SFCPART001533_BASIC' }); // Ensure 'SFSF' destination is configured
 
     // Process and return the list of direct reports
     if (userWithDirectReports.length > 0) {

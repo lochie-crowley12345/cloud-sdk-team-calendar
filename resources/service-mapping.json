@@ -1,17 +1,27 @@
 {
-  "API_MANAGE_WORKFORCE_TIMESHEET": {
-    "directoryName": "manage-workforce-timesheet-service",
-    "servicePath": "/sap/opu/odata/sap/API_MANAGE_WORKFORCE_TIMESHEET",
-    "npmPackageName": "manage-workforce-timesheet-service"
-  },
   "ECTimeOff": {
     "directoryName": "ec-time-off-service",
     "servicePath": "/odata/v2",
     "npmPackageName": "ec-time-off-service"
   },
-  "FoundationPLT": {
+  "EmpJob": {
+    "directoryName": "elevate-job-info-service",
+    "servicePath": "/odata/v2",
+    "npmPackageName": "elevate-job-info-service"
+  },
+  "FoundationPlatformPLT": {
     "directoryName": "foundation-platform-plt-service",
     "servicePath": "/odata/v2",
     "npmPackageName": "foundation-platform-plt-service"
-  }  
+  },
+  "PLTUserManagement": {
+    "directoryName": "plt-user-management-service",
+    "servicePath": "VALUE_IS_UNDEFINED",
+    "npmPackageName": "plt-user-management-service"
+  },
+  "UserNav": {
+    "directoryName": "elevate-user-service",
+    "servicePath": "/odata/v2",
+    "npmPackageName": "elevate-user-service"
+  }
 }

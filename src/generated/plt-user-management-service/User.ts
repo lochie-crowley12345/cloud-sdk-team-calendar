@@ -26,7 +26,7 @@ export class User<T extends DeSerializers = DefaultDeSerializers>
   /**
    * Default url path for the according service.
    */
-  static _defaultServicePath = 'VALUE_IS_UNDEFINED';
+  static _defaultServicePath = 'odata/v2';
   /**
    * All key fields of the User entity
    */

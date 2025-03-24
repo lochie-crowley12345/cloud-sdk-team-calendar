@@ -4,8 +4,11 @@ import { Appointment } from './model/appointment';
 import { readAppointments } from './read-appointments';
 //import { readPhotos } from './read-photos';
 //import { getDirectReports, getIndirectReports } from './read-reports';
+import {readPersons} from './read-persons';
+import { getDirectReports, getIndirectReports } from './read-reports';
 import { splitAppointmentIntoDays } from './util/time-util';
 import { buildTimeSheetEntry, writeTimeSheetEntry } from './write-appointments';
+import { Person } from './model/person';
 //useful for the backend unit test
 import cds from '@sap/cds';
 const { SELECT } = cds.ql;
@@ -24,6 +27,8 @@ export function serviceHandler(srv: any): void {
 
     try {
       const data = await readAppointments(year, srv);
+      console.log(data);
+      //return req.reply(50, null)
       return req.reply(data);
     } catch (error) {
       req.reject(
@@ -55,12 +60,12 @@ export function serviceHandler(srv: any): void {
     };
 });
 
-/* // Event handler for READ requests on the 'Person' entity
+ // Event handler for READ requests on the 'Person' entity
 srv.on('READ', 'Person', async (req) => {
   try {
     // Access email from the query parameters
     const email = req.query.email;
-
+    /*
     if (!email) {
       req.error(400, 'Email parameter is required to fetch person data.');
       return;
@@ -86,8 +91,24 @@ srv.on('READ', 'Person', async (req) => {
   } catch (error) {
     console.error('Error handling READ for Person:', error);
     req.error(500, 'An error occurred while fetching person data.');
+  }*/
+    
+    const users = await readPersons(srv);   
+    console.log("test read persons " + users[0].ID)
+    var temp: Person[] = users.map((persons) => ({
+      ID: persons.ID, // Example ID field
+      name: persons.name,
+      sfsfID: persons.ID,
+      username: persons.username,
+      role: persons.role,
+      hLevel: persons.hLevel
+    }));
+    return temp;
+  } catch (error) {
+    console.error('Error handling READ for Person:', error);
+    req.error(500, 'An error occurred while fetching person data.');
   }
-}); */
+}); 
 
   srv.after('UPDATE', 'Appointment', async (payload: Appointment, req) => {
     // the transaction joins the previous read request

@@ -1,21 +1,21 @@
 applications:
   #Application
-  - name: sv-demo
+  - name: Crowd-Schedule
     path: deployment/
     buildpacks:
       - nodejs_buildpack
     memory: 256M
     command: node dist/index.js
     routes:
-      - route: sv-demo.cfapps.us10-001.hana.ondemand.com
+      - route: sv-demo-internal.cfapps.us10-001.hana.ondemand.com
     services:
       - my-xsuaa
-      - my-destination
+      - my-destination-internal
   #Approuter      
-  - name: approuter-sv-demo
+  - name: Crowd-Schedule-Approuter
     path: approuter
     routes:
-      - route: approuter-sv-demo.cfapps.us10-001.hana.ondemand.com
+      - route: approuter-sv-demo-internal.cfapps.us10-001.hana.ondemand.com
     memory: 128M
     buildpacks:
       - nodejs_buildpack
@@ -25,8 +25,8 @@ applications:
       destinations: >
         [
           {
-            "name":"svdemo-dest",
-            "url":"https://sv-demo.cfapps.us10-001.hana.ondemand.com",
+            "name":"svdemo-dest-internal",
+            "url":"https://sv-demo-internal.cfapps.us10-001.hana.ondemand.com",
             "forwardAuthToken": true
           }
         ]

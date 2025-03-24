@@ -50,7 +50,7 @@ export async function readSfsfPhotoByPerson(
       photoApi.schema.PHOTO_TYPE.equals(photoType),
       photoApi.schema.USER_ID.equals(personId)
     )
-    .execute({ destinationName: 'SFSF' });
+    .execute({ destinationName: 'hcm-SFCPART001533_BASIC' });
 
 }
 

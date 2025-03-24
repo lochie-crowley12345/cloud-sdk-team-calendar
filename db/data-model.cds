@@ -19,6 +19,7 @@ entity Appointment {
 entity Person: managed {
   key ID: String;
   name: String;
+  username: String;
   role: String;
 //  s4ID: String;
 //  s4CompanyCode: String;
