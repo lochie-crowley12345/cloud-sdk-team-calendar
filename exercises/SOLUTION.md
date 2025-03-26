@@ -120,6 +120,6 @@ export async function readSfsfAppointmentsByPerson(
       employeeTimeApi.schema.START_DATE.greaterOrEqual(from),
       employeeTimeApi.schema.END_DATE.lessOrEqual(to)
     )
-    .execute({ destinationName: 'SFSF' });
+    .execute({ destinationName: 'hcm-SFCPART001533_BASIC' });
 }
 ```

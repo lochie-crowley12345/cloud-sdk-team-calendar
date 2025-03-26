@@ -16,7 +16,7 @@
   },
   "PLTUserManagement": {
     "directoryName": "plt-user-management-service",
-    "servicePath": "VALUE_IS_UNDEFINED",
+    "servicePath": "/odata/v2",
     "npmPackageName": "plt-user-management-service"
   },
   "UserNav": {

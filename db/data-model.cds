@@ -21,8 +21,10 @@ entity Person: managed {
   name: String;
   username: String;
   role: String;
-//  s4ID: String;
-//  s4CompanyCode: String;
+  location: String;
+  workscheduleCode: String;
+  s4ID: String;
+  s4CompanyCode: String;
   sfsfID: String;
   hlevel: Int16;
   appointments: Association to many Appointment on appointments.person = $self;

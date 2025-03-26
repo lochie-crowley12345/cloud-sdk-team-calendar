@@ -6,9 +6,7 @@
 			title="Appointment Details"
 			class="sapUiPopupWithPadding"
 			placement="HorizontalPreferredRight">
-		<endButton>
-			<Button text="OK" press="handleOKButton"/>
-		</endButton>
+			
 		<content>
 			<f:SimpleForm id="appointmentForm"
 					title="{title}"
@@ -43,5 +41,11 @@
 				</f:content>
 			</f:SimpleForm>
 		</content>
+		<Toolbar >
+			<ToolbarSpacer />
+			<Button text="URL" press="handleURLBtton" />
+			<Button text="OK" press="handleOKButton"/>
+			
+		</Toolbar>
 	</ResponsivePopover>
 </core:FragmentDefinition>

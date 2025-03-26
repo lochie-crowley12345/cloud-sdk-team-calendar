@@ -22,11 +22,6 @@
 						key="Team"
 						text="Team"/>
 				</Select>
-				<Button
-					id="PlanningCalendarCreateAppointmentButton"
-					text="Create"
-					press=".appointmentCreate"
-					tooltip="Create new appointment"/>
 			</toolbarContent>
 			<views>
 				<PlanningCalendarView
