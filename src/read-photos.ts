@@ -1,8 +1,8 @@
 import moment from 'moment';
 import {
   Photo,
-  foundationPlatformPltService1
-} from './generated/foundation-platform-plt-service-1';
+  foundationPlatformPltService
+} from './generated/foundation-platform-plt-service';
 import { Person } from './model/person';
 import { readPersons } from './read-persons';
 import { transformSfsfPhoto } from './util/appointment-transformation';
@@ -38,7 +38,7 @@ export async function readSfsfPhotoByPerson(
 
   // TODO: Retrieve EmployeeTime from SAP SuccessFactors here. Use the above variables for filtering.
   // return [];
-  const { photoApi } = foundationPlatformPltService1();
+  const { photoApi } = foundationPlatformPltService();
   return photoApi
     .requestBuilder()
     .getAll()

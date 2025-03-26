@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 SAP SE or an SAP affiliate company. All rights reserved.
+ * Copyright (c) 2025 SAP SE or an SAP affiliate company. All rights reserved.
  *
  * This is a generated file powered by the SAP Cloud SDK for JavaScript.
  */
@@ -25,7 +25,7 @@ export class UserPermissions<T extends DeSerializers = DefaultDeSerializers>
   /**
    * Default url path for the according service.
    */
-  static _defaultServicePath = 'VALUE_IS_UNDEFINED';
+  static _defaultServicePath = '/odata/v2';
   /**
    * All key fields of the UserPermissions entity
    */

@@ -1,0 +1,32 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WorkScheduleDayModelAssignment = void 0;
+/*
+ * Copyright (c) 2025 SAP SE or an SAP affiliate company. All rights reserved.
+ *
+ * This is a generated file powered by the SAP Cloud SDK for JavaScript.
+ */
+const odata_v2_1 = require("@sap-cloud-sdk/odata-v2");
+/**
+ * This class represents the entity "WorkScheduleDayModelAssignment" of service "ECTimeOff".
+ */
+class WorkScheduleDayModelAssignment extends odata_v2_1.Entity {
+    constructor(_entityApi) {
+        super(_entityApi);
+        this._entityApi = _entityApi;
+    }
+}
+exports.WorkScheduleDayModelAssignment = WorkScheduleDayModelAssignment;
+/**
+ * Technical entity name for WorkScheduleDayModelAssignment.
+ */
+WorkScheduleDayModelAssignment._entityName = 'WorkScheduleDayModelAssignment';
+/**
+ * Default url path for the according service.
+ */
+WorkScheduleDayModelAssignment._defaultServicePath = '/odata/v2';
+/**
+ * All key fields of the WorkScheduleDayModelAssignment entity
+ */
+WorkScheduleDayModelAssignment._keys = ['WorkSchedule_externalCode', 'day'];
+//# sourceMappingURL=WorkScheduleDayModelAssignment.js.map

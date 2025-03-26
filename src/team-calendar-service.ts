@@ -7,7 +7,6 @@ import { readAppointments } from './read-appointments';
 import {readPersons} from './read-persons';
 import { getDirectReports, getIndirectReports } from './read-reports';
 import { splitAppointmentIntoDays } from './util/time-util';
-import { buildTimeSheetEntry, writeTimeSheetEntry } from './write-appointments';
 import { Person } from './model/person';
 //useful for the backend unit test
 import cds from '@sap/cds';
@@ -63,14 +62,7 @@ export function serviceHandler(srv: any): void {
  // Event handler for READ requests on the 'Person' entity
 srv.on('READ', 'Person', async (req) => {
   try {
-    // Access email from the query parameters
-    const email = req.query.email;
-    /*
-    if (!email) {
-      req.error(400, 'Email parameter is required to fetch person data.');
-      return;
-    }
-
+/*
     // Fetch direct reports
     const directReports = await getDirectReports(email);
 
@@ -94,15 +86,19 @@ srv.on('READ', 'Person', async (req) => {
   }*/
     
     const users = await readPersons(srv);   
-    console.log("test read persons " + users[0].ID)
-    var temp: Person[] = users.map((persons) => ({
+    console.log("test read persons " + users[0].location)
+    var temp: Person[] = users.map((persons) => 
+      ({
       ID: persons.ID, // Example ID field
       name: persons.name,
       sfsfID: persons.ID,
       username: persons.username,
+      location: persons.location,
       role: persons.role,
-      hLevel: persons.hLevel
+      hLevel: 1,
+      workscheduleCode: persons.workscheduleCode
     }));
+    console.log("Show mee " + temp[0].workscheduleCode)
     return temp;
   } catch (error) {
     console.error('Error handling READ for Person:', error);
@@ -110,33 +106,4 @@ srv.on('READ', 'Person', async (req) => {
   }
 }); 
 
-  srv.after('UPDATE', 'Appointment', async (payload: Appointment, req) => {
-    // the transaction joins the previous read request
-    console.log(JSON.stringify(payload, null, 2));
-    const tx = srv.transaction(req);
-    const [appointment] = await tx.run(
-      SELECT.from('Appointment').where({ ID: payload.ID })
-    );
-    console.log(JSON.stringify(appointment, null, 2));
-    if (!appointment) {
-      throw new Error(`No appointment found with ID ${payload.ID}`);
-    }
-
-    const [person] = await tx.run(
-      SELECT.from('Person').where({ ID: appointment.person_ID })
-    );
-    if (!person) {
-      throw new Error(`No person found with ID ${appointment.person_ID}`);
-    }
-    // split into multiple days and write in parallel
-    return Promise.all(
-      splitAppointmentIntoDays(appointment)
-        .map(day => buildTimeSheetEntry(appointment, person, day))
-        .map(writeTimeSheetEntry)
-    )
-      .then(() => appointment)
-      .catch(error => {
-        throw Error(`Failed to create appointment! ${error.message}`);
-      });
-  });
 }

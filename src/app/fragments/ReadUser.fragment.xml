@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+		xmlns:l="sap.ui.layout"
+		xmlns:core="sap.ui.core"
+		xmlns="sap.m">
+	<l:VerticalLayout
+			class="sapUiContentPadding"
+			width="100%">
+		<l:content>
+			<Label text="Name: " labelFor="name"/>
+			<Text text = "{userData>/name}"/>			
+			<Label text="User Id:" labelFor="userId" />
+			<Text text = "{userData>/userId}"/>
+			<Label text="Location:" labelFor="location" />
+			<Text text = "{userData>/location}"/>
+			<Label text="Work Schedule:" labelFor="workSchedule" />
+			<Text text = "{userData>/workScheduleCode}"/>
+		</l:content>
+	</l:VerticalLayout>
+</core:FragmentDefinition>

@@ -11,7 +11,8 @@ export const person = {
   role: 'Tester',
   s4ID: 's4',
   s4CompanyCode: '1010',
-  sfsfID: 'sfsf'
+  sfsfID: 'sfsf',
+  location: 'test'
 };
 
 export const localAppointment: Appointment = {

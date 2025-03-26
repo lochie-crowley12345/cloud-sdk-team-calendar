@@ -1,0 +1,389 @@
+/*
+ * Copyright (c) 2025 SAP SE or an SAP affiliate company. All rights reserved.
+ *
+ * This is a generated file powered by the SAP Cloud SDK for JavaScript.
+ */
+import { EmployeeTimeAus } from './EmployeeTimeAus';
+import { EmployeeTimeAusRequestBuilder } from './EmployeeTimeAusRequestBuilder';
+import {
+  CustomField,
+  DefaultDeSerializers,
+  DeSerializers,
+  AllFields,
+  EntityBuilderType,
+  EntityApi,
+  FieldBuilder,
+  OrderableEdmTypeField
+} from '@sap-cloud-sdk/odata-v2';
+export declare class EmployeeTimeAusApi<
+  DeSerializersT extends DeSerializers = DefaultDeSerializers
+> implements EntityApi<EmployeeTimeAus<DeSerializersT>, DeSerializersT>
+{
+  deSerializers: DeSerializersT;
+  constructor(deSerializers?: DeSerializersT);
+  private navigationPropertyFields;
+  _addNavigationProperties(linkedApis: []): this;
+  entityConstructor: typeof EmployeeTimeAus;
+  requestBuilder(): EmployeeTimeAusRequestBuilder<DeSerializersT>;
+  entityBuilder(): EntityBuilderType<
+    EmployeeTimeAus<DeSerializersT>,
+    DeSerializersT
+  >;
+  customField<NullableT extends boolean = false>(
+    fieldName: string,
+    isNullable?: NullableT
+  ): CustomField<EmployeeTimeAus<DeSerializersT>, DeSerializersT, NullableT>;
+  private _fieldBuilder?;
+  get fieldBuilder(): FieldBuilder<typeof EmployeeTimeAus, DeSerializersT>;
+  private _schema?;
+  get schema(): {
+    EMPLOYEE_TIME_EXTERNAL_CODE: OrderableEdmTypeField<
+      EmployeeTimeAus<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      false,
+      true
+    >;
+    CREATED_BY: OrderableEdmTypeField<
+      EmployeeTimeAus<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    CREATED_DATE_TIME: OrderableEdmTypeField<
+      EmployeeTimeAus<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.DateTimeOffset',
+      true,
+      true
+    >;
+    CUST_WORKFLOW_FIELD_1: OrderableEdmTypeField<
+      EmployeeTimeAus<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    CUST_WORKFLOW_FIELD_2: OrderableEdmTypeField<
+      EmployeeTimeAus<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    ENTITY_UUID: OrderableEdmTypeField<
+      EmployeeTimeAus<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    EXTERNAL_CODE: OrderableEdmTypeField<
+      EmployeeTimeAus<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.Int64',
+      false,
+      true
+    >;
+    LAST_MODIFIED_BY: OrderableEdmTypeField<
+      EmployeeTimeAus<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    LAST_MODIFIED_DATE_TIME: OrderableEdmTypeField<
+      EmployeeTimeAus<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.DateTimeOffset',
+      true,
+      true
+    >;
+    MDF_SYSTEM_RECORD_STATUS: OrderableEdmTypeField<
+      EmployeeTimeAus<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    REQUEST_ADVANCE_LEAVE_PAYMENT: OrderableEdmTypeField<
+      EmployeeTimeAus<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.Boolean',
+      true,
+      true
+    >;
+    SPLIT_PAYMENT_ACROSS_FINANCIAL_YEAR: OrderableEdmTypeField<
+      EmployeeTimeAus<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.Boolean',
+      true,
+      true
+    >;
+    ALL_FIELDS: AllFields<
+      EmployeeTimeAus<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >
+    >;
+  };
+}
+//# sourceMappingURL=EmployeeTimeAusApi.d.ts.map

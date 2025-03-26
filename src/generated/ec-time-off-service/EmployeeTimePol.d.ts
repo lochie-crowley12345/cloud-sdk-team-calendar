@@ -1,0 +1,125 @@
+/*
+ * Copyright (c) 2025 SAP SE or an SAP affiliate company. All rights reserved.
+ *
+ * This is a generated file powered by the SAP Cloud SDK for JavaScript.
+ */
+import {
+  Entity,
+  DefaultDeSerializers,
+  DeSerializers,
+  DeserializedType
+} from '@sap-cloud-sdk/odata-v2';
+import type { EmployeeTimePolApi } from './EmployeeTimePolApi';
+/**
+ * This class represents the entity "EmployeeTimePOL" of service "ECTimeOff".
+ */
+export declare class EmployeeTimePol<
+    T extends DeSerializers = DefaultDeSerializers
+  >
+  extends Entity
+  implements EmployeeTimePolType<T>
+{
+  readonly _entityApi: EmployeeTimePolApi<T>;
+  /**
+   * Technical entity name for EmployeeTimePol.
+   */
+  static _entityName: string;
+  /**
+   * Default url path for the according service.
+   */
+  static _defaultServicePath: string;
+  /**
+   * All key fields of the EmployeeTimePol entity
+   */
+  static _keys: string[];
+  /**
+   * Employee Time_External Code.
+   * Maximum length: 128.
+   */
+  employeeTimeExternalCode: DeserializedType<T, 'Edm.String'>;
+  /**
+   * ZLA Code.
+   * Maximum length: 8.
+   * @nullable
+   */
+  absenceCode?: DeserializedType<T, 'Edm.String'> | null;
+  /**
+   * createdBy.
+   * Maximum length: 255.
+   * @nullable
+   */
+  createdBy?: DeserializedType<T, 'Edm.String'> | null;
+  /**
+   * createdDate.
+   * @nullable
+   */
+  createdDateTime?: DeserializedType<T, 'Edm.DateTimeOffset'> | null;
+  /**
+   * Custom Field POL.
+   * Maximum length: 20.
+   * @nullable
+   */
+  custPol?: DeserializedType<T, 'Edm.String'> | null;
+  /**
+   * Entity UUID.
+   * Maximum length: 255.
+   * @nullable
+   */
+  entityUuid?: DeserializedType<T, 'Edm.String'> | null;
+  /**
+   * externalCode.
+   */
+  externalCode: DeserializedType<T, 'Edm.Int64'>;
+  /**
+   * lastModifiedBy.
+   * Maximum length: 255.
+   * @nullable
+   */
+  lastModifiedBy?: DeserializedType<T, 'Edm.String'> | null;
+  /**
+   * lastModifiedDate.
+   * @nullable
+   */
+  lastModifiedDateTime?: DeserializedType<T, 'Edm.DateTimeOffset'> | null;
+  /**
+   * Record Status.
+   * Maximum length: 255.
+   * @nullable
+   */
+  mdfSystemRecordStatus?: DeserializedType<T, 'Edm.String'> | null;
+  /**
+   * ZLA Delivery Date.
+   * @nullable
+   */
+  zlaDeliveryDate?: DeserializedType<T, 'Edm.DateTime'> | null;
+  /**
+   * ZLA Document Number.
+   * Maximum length: 9.
+   * @nullable
+   */
+  zlaDocumentNumber?: DeserializedType<T, 'Edm.String'> | null;
+  /**
+   * ZLA Issue Date.
+   * @nullable
+   */
+  zlaIssueDate?: DeserializedType<T, 'Edm.DateTime'> | null;
+  constructor(_entityApi: EmployeeTimePolApi<T>);
+}
+export interface EmployeeTimePolType<
+  T extends DeSerializers = DefaultDeSerializers
+> {
+  employeeTimeExternalCode: DeserializedType<T, 'Edm.String'>;
+  absenceCode?: DeserializedType<T, 'Edm.String'> | null;
+  createdBy?: DeserializedType<T, 'Edm.String'> | null;
+  createdDateTime?: DeserializedType<T, 'Edm.DateTimeOffset'> | null;
+  custPol?: DeserializedType<T, 'Edm.String'> | null;
+  entityUuid?: DeserializedType<T, 'Edm.String'> | null;
+  externalCode: DeserializedType<T, 'Edm.Int64'>;
+  lastModifiedBy?: DeserializedType<T, 'Edm.String'> | null;
+  lastModifiedDateTime?: DeserializedType<T, 'Edm.DateTimeOffset'> | null;
+  mdfSystemRecordStatus?: DeserializedType<T, 'Edm.String'> | null;
+  zlaDeliveryDate?: DeserializedType<T, 'Edm.DateTime'> | null;
+  zlaDocumentNumber?: DeserializedType<T, 'Edm.String'> | null;
+  zlaIssueDate?: DeserializedType<T, 'Edm.DateTime'> | null;
+}
+//# sourceMappingURL=EmployeeTimePol.d.ts.map

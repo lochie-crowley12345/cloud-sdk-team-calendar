@@ -1,0 +1,469 @@
+/*
+ * Copyright (c) 2025 SAP SE or an SAP affiliate company. All rights reserved.
+ *
+ * This is a generated file powered by the SAP Cloud SDK for JavaScript.
+ */
+import { TimeManagementTerminationEndHandlingLegalEntityConfiguration } from './TimeManagementTerminationEndHandlingLegalEntityConfiguration';
+import { TimeManagementTerminationEndHandlingLegalEntityConfigurationRequestBuilder } from './TimeManagementTerminationEndHandlingLegalEntityConfigurationRequestBuilder';
+import { TimeManagementTerminationEndHandlingExclusionApi } from './TimeManagementTerminationEndHandlingExclusionApi';
+import {
+  CustomField,
+  DefaultDeSerializers,
+  DeSerializers,
+  AllFields,
+  EntityBuilderType,
+  EntityApi,
+  FieldBuilder,
+  OrderableEdmTypeField,
+  OneToOneLink
+} from '@sap-cloud-sdk/odata-v2';
+export declare class TimeManagementTerminationEndHandlingLegalEntityConfigurationApi<
+  DeSerializersT extends DeSerializers = DefaultDeSerializers
+> implements
+    EntityApi<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<DeSerializersT>,
+      DeSerializersT
+    >
+{
+  deSerializers: DeSerializersT;
+  constructor(deSerializers?: DeSerializersT);
+  private navigationPropertyFields;
+  _addNavigationProperties(
+    linkedApis: [
+      TimeManagementTerminationEndHandlingExclusionApi<DeSerializersT>
+    ]
+  ): this;
+  entityConstructor: typeof TimeManagementTerminationEndHandlingLegalEntityConfiguration;
+  requestBuilder(): TimeManagementTerminationEndHandlingLegalEntityConfigurationRequestBuilder<DeSerializersT>;
+  entityBuilder(): EntityBuilderType<
+    TimeManagementTerminationEndHandlingLegalEntityConfiguration<DeSerializersT>,
+    DeSerializersT
+  >;
+  customField<NullableT extends boolean = false>(
+    fieldName: string,
+    isNullable?: NullableT
+  ): CustomField<
+    TimeManagementTerminationEndHandlingLegalEntityConfiguration<DeSerializersT>,
+    DeSerializersT,
+    NullableT
+  >;
+  private _fieldBuilder?;
+  get fieldBuilder(): FieldBuilder<
+    typeof TimeManagementTerminationEndHandlingLegalEntityConfiguration,
+    DeSerializersT
+  >;
+  private _schema?;
+  get schema(): {
+    TIME_MANAGEMENT_TERMINATION_END_HANDLING_CONFIGURATION_EXTERNAL_CODE: OrderableEdmTypeField<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      false,
+      true
+    >;
+    ACTIVATION_STATUS: OrderableEdmTypeField<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    AUTOMATION_LEVEL_OF_EMPLOYEE_TIME_PROCESSING: OrderableEdmTypeField<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    AUTOMATION_LEVEL_OF_TIME_ACCOUNT_CLOSING: OrderableEdmTypeField<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    CREATED_BY: OrderableEdmTypeField<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    CREATED_DATE_TIME: OrderableEdmTypeField<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.DateTimeOffset',
+      true,
+      true
+    >;
+    ENTITY_UUID: OrderableEdmTypeField<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    EXCLUDES: OrderableEdmTypeField<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    EXTERNAL_CODE: OrderableEdmTypeField<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      false,
+      true
+    >;
+    LAST_MODIFIED_BY: OrderableEdmTypeField<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    LAST_MODIFIED_DATE_TIME: OrderableEdmTypeField<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.DateTimeOffset',
+      true,
+      true
+    >;
+    LEGAL_ENTITY: OrderableEdmTypeField<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    MDF_SYSTEM_RECORD_STATUS: OrderableEdmTypeField<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    OFFSET_IN_DAYS: OrderableEdmTypeField<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.Int64',
+      true,
+      true
+    >;
+    /**
+     * Static representation of the one-to-one navigation property {@link excludesNav} for query construction.
+     * Use to reference this property in query operations such as 'select' in the fluent request API.
+     */
+    EXCLUDES_NAV: OneToOneLink<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<DeSerializersT>,
+      DeSerializersT,
+      TimeManagementTerminationEndHandlingExclusionApi<DeSerializersT>
+    >;
+    ALL_FIELDS: AllFields<
+      TimeManagementTerminationEndHandlingLegalEntityConfiguration<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >
+    >;
+  };
+}
+//# sourceMappingURL=TimeManagementTerminationEndHandlingLegalEntityConfigurationApi.d.ts.map

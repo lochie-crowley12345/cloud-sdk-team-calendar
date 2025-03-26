@@ -1,0 +1,37 @@
+/*
+ * Copyright (c) 2025 SAP SE or an SAP affiliate company. All rights reserved.
+ *
+ * This is a generated file powered by the SAP Cloud SDK for JavaScript.
+ */
+import {
+  DefaultDeSerializers,
+  DeSerializers,
+  GetAllRequestBuilder,
+  GetByKeyRequestBuilder,
+  DeserializedType,
+  RequestBuilder
+} from '@sap-cloud-sdk/odata-v2';
+import { TimeTypeUsa } from './TimeTypeUsa';
+/**
+ * Request builder class for operations supported on the {@link TimeTypeUsa} entity.
+ */
+export declare class TimeTypeUsaRequestBuilder<
+  T extends DeSerializers = DefaultDeSerializers
+> extends RequestBuilder<TimeTypeUsa<T>, T> {
+  /**
+   * Returns a request builder for retrieving one `TimeTypeUsa` entity based on its keys.
+   * @param timeTypeExternalCode Key property. See {@link TimeTypeUsa.timeTypeExternalCode}.
+   * @param externalCode Key property. See {@link TimeTypeUsa.externalCode}.
+   * @returns A request builder for creating requests to retrieve one `TimeTypeUsa` entity based on its keys.
+   */
+  getByKey(
+    timeTypeExternalCode: DeserializedType<T, 'Edm.String'>,
+    externalCode: DeserializedType<T, 'Edm.String'>
+  ): GetByKeyRequestBuilder<TimeTypeUsa<T>, T>;
+  /**
+   * Returns a request builder for querying all `TimeTypeUsa` entities.
+   * @returns A request builder for creating requests to retrieve all `TimeTypeUsa` entities.
+   */
+  getAll(): GetAllRequestBuilder<TimeTypeUsa<T>, T>;
+}
+//# sourceMappingURL=TimeTypeUsaRequestBuilder.d.ts.map

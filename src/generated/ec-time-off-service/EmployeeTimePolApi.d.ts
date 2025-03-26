@@ -1,0 +1,416 @@
+/*
+ * Copyright (c) 2025 SAP SE or an SAP affiliate company. All rights reserved.
+ *
+ * This is a generated file powered by the SAP Cloud SDK for JavaScript.
+ */
+import { EmployeeTimePol } from './EmployeeTimePol';
+import { EmployeeTimePolRequestBuilder } from './EmployeeTimePolRequestBuilder';
+import {
+  CustomField,
+  DefaultDeSerializers,
+  DeSerializers,
+  AllFields,
+  EntityBuilderType,
+  EntityApi,
+  FieldBuilder,
+  OrderableEdmTypeField
+} from '@sap-cloud-sdk/odata-v2';
+export declare class EmployeeTimePolApi<
+  DeSerializersT extends DeSerializers = DefaultDeSerializers
+> implements EntityApi<EmployeeTimePol<DeSerializersT>, DeSerializersT>
+{
+  deSerializers: DeSerializersT;
+  constructor(deSerializers?: DeSerializersT);
+  private navigationPropertyFields;
+  _addNavigationProperties(linkedApis: []): this;
+  entityConstructor: typeof EmployeeTimePol;
+  requestBuilder(): EmployeeTimePolRequestBuilder<DeSerializersT>;
+  entityBuilder(): EntityBuilderType<
+    EmployeeTimePol<DeSerializersT>,
+    DeSerializersT
+  >;
+  customField<NullableT extends boolean = false>(
+    fieldName: string,
+    isNullable?: NullableT
+  ): CustomField<EmployeeTimePol<DeSerializersT>, DeSerializersT, NullableT>;
+  private _fieldBuilder?;
+  get fieldBuilder(): FieldBuilder<typeof EmployeeTimePol, DeSerializersT>;
+  private _schema?;
+  get schema(): {
+    EMPLOYEE_TIME_EXTERNAL_CODE: OrderableEdmTypeField<
+      EmployeeTimePol<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      false,
+      true
+    >;
+    ABSENCE_CODE: OrderableEdmTypeField<
+      EmployeeTimePol<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    CREATED_BY: OrderableEdmTypeField<
+      EmployeeTimePol<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    CREATED_DATE_TIME: OrderableEdmTypeField<
+      EmployeeTimePol<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.DateTimeOffset',
+      true,
+      true
+    >;
+    CUST_POL: OrderableEdmTypeField<
+      EmployeeTimePol<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    ENTITY_UUID: OrderableEdmTypeField<
+      EmployeeTimePol<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    EXTERNAL_CODE: OrderableEdmTypeField<
+      EmployeeTimePol<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.Int64',
+      false,
+      true
+    >;
+    LAST_MODIFIED_BY: OrderableEdmTypeField<
+      EmployeeTimePol<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    LAST_MODIFIED_DATE_TIME: OrderableEdmTypeField<
+      EmployeeTimePol<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.DateTimeOffset',
+      true,
+      true
+    >;
+    MDF_SYSTEM_RECORD_STATUS: OrderableEdmTypeField<
+      EmployeeTimePol<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    ZLA_DELIVERY_DATE: OrderableEdmTypeField<
+      EmployeeTimePol<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.DateTime',
+      true,
+      true
+    >;
+    ZLA_DOCUMENT_NUMBER: OrderableEdmTypeField<
+      EmployeeTimePol<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    ZLA_ISSUE_DATE: OrderableEdmTypeField<
+      EmployeeTimePol<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.DateTime',
+      true,
+      true
+    >;
+    ALL_FIELDS: AllFields<
+      EmployeeTimePol<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >
+    >;
+  };
+}
+//# sourceMappingURL=EmployeeTimePolApi.d.ts.map

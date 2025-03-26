@@ -1,0 +1,389 @@
+/*
+ * Copyright (c) 2025 SAP SE or an SAP affiliate company. All rights reserved.
+ *
+ * This is a generated file powered by the SAP Cloud SDK for JavaScript.
+ */
+import { TimeTypeUsa } from './TimeTypeUsa';
+import { TimeTypeUsaRequestBuilder } from './TimeTypeUsaRequestBuilder';
+import {
+  CustomField,
+  DefaultDeSerializers,
+  DeSerializers,
+  AllFields,
+  EntityBuilderType,
+  EntityApi,
+  FieldBuilder,
+  OrderableEdmTypeField
+} from '@sap-cloud-sdk/odata-v2';
+export declare class TimeTypeUsaApi<
+  DeSerializersT extends DeSerializers = DefaultDeSerializers
+> implements EntityApi<TimeTypeUsa<DeSerializersT>, DeSerializersT>
+{
+  deSerializers: DeSerializersT;
+  constructor(deSerializers?: DeSerializersT);
+  private navigationPropertyFields;
+  _addNavigationProperties(linkedApis: []): this;
+  entityConstructor: typeof TimeTypeUsa;
+  requestBuilder(): TimeTypeUsaRequestBuilder<DeSerializersT>;
+  entityBuilder(): EntityBuilderType<
+    TimeTypeUsa<DeSerializersT>,
+    DeSerializersT
+  >;
+  customField<NullableT extends boolean = false>(
+    fieldName: string,
+    isNullable?: NullableT
+  ): CustomField<TimeTypeUsa<DeSerializersT>, DeSerializersT, NullableT>;
+  private _fieldBuilder?;
+  get fieldBuilder(): FieldBuilder<typeof TimeTypeUsa, DeSerializersT>;
+  private _schema?;
+  get schema(): {
+    TIME_TYPE_EXTERNAL_CODE: OrderableEdmTypeField<
+      TimeTypeUsa<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      false,
+      true
+    >;
+    CREATED_BY: OrderableEdmTypeField<
+      TimeTypeUsa<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    CREATED_DATE_TIME: OrderableEdmTypeField<
+      TimeTypeUsa<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.DateTimeOffset',
+      true,
+      true
+    >;
+    DURATION_OF_DISABILITY_PERIOD_ONE: OrderableEdmTypeField<
+      TimeTypeUsa<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.Int64',
+      true,
+      true
+    >;
+    DURATION_OF_DISABILITY_PERIOD_THREE: OrderableEdmTypeField<
+      TimeTypeUsa<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.Int64',
+      true,
+      true
+    >;
+    DURATION_OF_DISABILITY_PERIOD_TWO: OrderableEdmTypeField<
+      TimeTypeUsa<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.Int64',
+      true,
+      true
+    >;
+    ENTITY_UUID: OrderableEdmTypeField<
+      TimeTypeUsa<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    EXTERNAL_CODE: OrderableEdmTypeField<
+      TimeTypeUsa<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      false,
+      true
+    >;
+    LAST_MODIFIED_BY: OrderableEdmTypeField<
+      TimeTypeUsa<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    LAST_MODIFIED_DATE_TIME: OrderableEdmTypeField<
+      TimeTypeUsa<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.DateTimeOffset',
+      true,
+      true
+    >;
+    MDF_SYSTEM_RECORD_STATUS: OrderableEdmTypeField<
+      TimeTypeUsa<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    SICKNESS_VARIANT: OrderableEdmTypeField<
+      TimeTypeUsa<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >,
+      DeSerializersT,
+      'Edm.String',
+      true,
+      true
+    >;
+    ALL_FIELDS: AllFields<
+      TimeTypeUsa<
+        DeSerializers<
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any,
+          any
+        >
+      >
+    >;
+  };
+}
+//# sourceMappingURL=TimeTypeUsaApi.d.ts.map

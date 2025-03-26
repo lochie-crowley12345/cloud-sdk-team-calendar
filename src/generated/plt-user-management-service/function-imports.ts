@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 SAP SE or an SAP affiliate company. All rights reserved.
+ * Copyright (c) 2025 SAP SE or an SAP affiliate company. All rights reserved.
  *
  * This is a generated file powered by the SAP Cloud SDK for JavaScript.
  */
@@ -51,7 +51,7 @@ export function getUserNameFormat<
 
   return new FunctionImportRequestBuilder(
     'get',
-    'VALUE_IS_UNDEFINED',
+    '/odata/v2',
     'getUserNameFormat',
     data =>
       transformReturnValueForEdmType(data, val =>
@@ -99,7 +99,7 @@ export function getPasswordPolicy<
 
   return new FunctionImportRequestBuilder(
     'get',
-    'VALUE_IS_UNDEFINED',
+    '/odata/v2',
     'getPasswordPolicy',
     data =>
       transformReturnValueForEdmType(data, val =>

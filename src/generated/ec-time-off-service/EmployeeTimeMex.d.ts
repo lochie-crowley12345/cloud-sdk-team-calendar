@@ -1,0 +1,138 @@
+/*
+ * Copyright (c) 2025 SAP SE or an SAP affiliate company. All rights reserved.
+ *
+ * This is a generated file powered by the SAP Cloud SDK for JavaScript.
+ */
+import {
+  Entity,
+  DefaultDeSerializers,
+  DeSerializers,
+  DeserializedType
+} from '@sap-cloud-sdk/odata-v2';
+import type { EmployeeTimeMexApi } from './EmployeeTimeMexApi';
+import { EmployeeTimeGroup, EmployeeTimeGroupType } from './EmployeeTimeGroup';
+/**
+ * This class represents the entity "EmployeeTimeMEX" of service "ECTimeOff".
+ */
+export declare class EmployeeTimeMex<
+    T extends DeSerializers = DefaultDeSerializers
+  >
+  extends Entity
+  implements EmployeeTimeMexType<T>
+{
+  readonly _entityApi: EmployeeTimeMexApi<T>;
+  /**
+   * Technical entity name for EmployeeTimeMex.
+   */
+  static _entityName: string;
+  /**
+   * Default url path for the according service.
+   */
+  static _defaultServicePath: string;
+  /**
+   * All key fields of the EmployeeTimeMex entity
+   */
+  static _keys: string[];
+  /**
+   * Employee Time_External Code.
+   * Maximum length: 128.
+   */
+  employeeTimeExternalCode: DeserializedType<T, 'Edm.String'>;
+  /**
+   * createdBy.
+   * Maximum length: 255.
+   * @nullable
+   */
+  createdBy?: DeserializedType<T, 'Edm.String'> | null;
+  /**
+   * createdDate.
+   * @nullable
+   */
+  createdDateTime?: DeserializedType<T, 'Edm.DateTimeOffset'> | null;
+  /**
+   * Custom MEX.
+   * Maximum length: 255.
+   * @nullable
+   */
+  custMex?: DeserializedType<T, 'Edm.String'> | null;
+  /**
+   * test.
+   * Maximum length: 255.
+   * @nullable
+   */
+  custTest?: DeserializedType<T, 'Edm.String'> | null;
+  /**
+   * Days Already Cumulated For Same Sickness.
+   * @nullable
+   */
+  daysAlreadyCumulatedForSameSickness?: DeserializedType<
+    T,
+    'Edm.Decimal'
+  > | null;
+  /**
+   * Entity UUID.
+   * Maximum length: 255.
+   * @nullable
+   */
+  entityUuid?: DeserializedType<T, 'Edm.String'> | null;
+  /**
+   * externalCode.
+   */
+  externalCode: DeserializedType<T, 'Edm.Int64'>;
+  /**
+   * Identical Sicknesses.
+   * Maximum length: 128.
+   * @nullable
+   */
+  identicalSicknessGroup?: DeserializedType<T, 'Edm.String'> | null;
+  /**
+   * lastModifiedBy.
+   * Maximum length: 255.
+   * @nullable
+   */
+  lastModifiedBy?: DeserializedType<T, 'Edm.String'> | null;
+  /**
+   * lastModifiedDate.
+   * @nullable
+   */
+  lastModifiedDateTime?: DeserializedType<T, 'Edm.DateTimeOffset'> | null;
+  /**
+   * Record Status.
+   * Maximum length: 255.
+   * @nullable
+   */
+  mdfSystemRecordStatus?: DeserializedType<T, 'Edm.String'> | null;
+  /**
+   * Reference Number.
+   * Maximum length: 8.
+   * @nullable
+   */
+  referenceNumber?: DeserializedType<T, 'Edm.String'> | null;
+  /**
+   * One-to-one navigation property to the {@link EmployeeTimeGroup} entity.
+   */
+  identicalSicknessGroupNav?: EmployeeTimeGroup<T> | null;
+  constructor(_entityApi: EmployeeTimeMexApi<T>);
+}
+export interface EmployeeTimeMexType<
+  T extends DeSerializers = DefaultDeSerializers
+> {
+  employeeTimeExternalCode: DeserializedType<T, 'Edm.String'>;
+  createdBy?: DeserializedType<T, 'Edm.String'> | null;
+  createdDateTime?: DeserializedType<T, 'Edm.DateTimeOffset'> | null;
+  custMex?: DeserializedType<T, 'Edm.String'> | null;
+  custTest?: DeserializedType<T, 'Edm.String'> | null;
+  daysAlreadyCumulatedForSameSickness?: DeserializedType<
+    T,
+    'Edm.Decimal'
+  > | null;
+  entityUuid?: DeserializedType<T, 'Edm.String'> | null;
+  externalCode: DeserializedType<T, 'Edm.Int64'>;
+  identicalSicknessGroup?: DeserializedType<T, 'Edm.String'> | null;
+  lastModifiedBy?: DeserializedType<T, 'Edm.String'> | null;
+  lastModifiedDateTime?: DeserializedType<T, 'Edm.DateTimeOffset'> | null;
+  mdfSystemRecordStatus?: DeserializedType<T, 'Edm.String'> | null;
+  referenceNumber?: DeserializedType<T, 'Edm.String'> | null;
+  identicalSicknessGroupNav?: EmployeeTimeGroupType<T> | null;
+}
+//# sourceMappingURL=EmployeeTimeMex.d.ts.map

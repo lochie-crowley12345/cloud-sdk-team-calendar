@@ -8,6 +8,7 @@ import { Person } from './model/person';
 import { readPersons } from './read-persons';
 import { transformSfsfAppointment } from './util/appointment-transformation';
 import { convertCompilerOptionsFromJson } from 'typescript';
+import { dateToString } from './util/time-util';
 
 export async function readAppointments(
   year: number,
@@ -78,101 +79,69 @@ export async function readSfsfAppointmentsByPerson(
     return temp;
 }
 export async function readWorkSchedulewithPlannedHrs(persons: Person): Promise<Appointment[]> {
-  const { workScheduleApi} = ecTimeOffService();
-  const from = moment.utc(`2025-01-01`);
-  const to = moment.utc(`2025-12-31`);
-  console.log("Testinggg?: "+ persons.sfsfID)
+  const { workScheduleApi, workScheduleDayModelAssignmentApi} = ecTimeOffService();
+  const from = moment.utc(`2025-03-08`);
+  const to = moment.utc(`2025-06-30`);
+  console.log("Testinggg?: "+ persons.workscheduleCode)
   
   let temp=  await workScheduleApi
     .requestBuilder()
     .getAll()
     .select(
       workScheduleApi.schema.EXTERNAL_CODE,
-      //workScheduleApi.schema.WORK_SCHEDULE_DAY_MODELS,
-      workScheduleApi.schema.STARTING_DATE,
-      workScheduleApi.schema.MDF_SYSTEM_EFFECTIVE_END_DATE,
-      workScheduleApi.schema.USER_ID//,
-      //workScheduleApi.schema.PERIOD_MODEL
-    )
-    .filter(
-      //employeeTimeApi.schema.TIME_TYPE.equals(timeType),
-      workScheduleApi.schema.USER_ID.equals(persons.sfsfID)
-    )
-    .execute({ destinationName: 'hcm-SFCPART001533_BASIC' });    
-    console.log("Output: WorkSchedules " +  temp.length);
-    console.log("Output Day Models: " +  temp[0]);
-
-    if (temp.length == 0) return [];/*
-    const WorkSchedules: Appointment[] = temp.map(WS => 
-      WS.workScheduleDayModels.map(DayModel => ({ // set data type to be the Appointment[]
-      ID: DayModel.entityUuid,
-      calendar_year: 2025,
-      end_date:  DayModel,
-      end_time: " ",
-      info: " ",
-      person_ID: DayModel.userId,
-      start_date: DayModel.startingDate.toString(),
-      start_time: " ",
-      status: "APPROVED",
-      title: " ",
-      type: "WS"
-      })          // reduce the created WS' Day Model lists into a list of appointments  
-    ).reduce( (WS) => [..WS, ]));*/
-    //console.log(temp)
-    return [];
-}
-export async function readWorkSchedulewithDayModel(persons: Person): Promise<Appointment[]> {
-  const { workScheduleApi, workScheduleDayModelAssignmentApi } = ecTimeOffService();
-  const from = moment.utc(`2025-01-01`);
-  const to = moment.utc(`2025-12-31`);
-  console.log("Testinggg: "+ persons)
-  
-  let temp=  await workScheduleApi
-    .requestBuilder()
-    .getAll()
-    .select(
-      workScheduleApi.schema.EXTERNAL_CODE,
-      //workScheduleApi.schema.WORK_SCHEDULE_DAY_MODELS,
       workScheduleApi.schema.STARTING_DATE,
       workScheduleApi.schema.MDF_SYSTEM_EFFECTIVE_END_DATE,
       workScheduleApi.schema.USER_ID,
       workScheduleApi.schema.WORK_SCHEDULE_DAY_MODELS.select(
         workScheduleDayModelAssignmentApi.schema.DAY,
-        workScheduleDayModelAssignmentApi.schema.MDF_SYSTEM_EFFECTIVE_START_DATE,
-        workScheduleDayModelAssignmentApi.schema.MDF_SYSTEM_EFFECTIVE_END_DATE,
-        workScheduleDayModelAssignmentApi.schema.WORK_SCHEDULE_EXTERNAL_CODE
-      )
+        workScheduleDayModelAssignmentApi.schema.DAY_MODEL,
+        workScheduleDayModelAssignmentApi.schema.CATEGORY,
+        workScheduleDayModelAssignmentApi.schema.HOURS_AND_MINUTES
+
+      )//,
+      //workScheduleApi.schema.PERIOD_MODEL
     )
     .filter(
       //employeeTimeApi.schema.TIME_TYPE.equals(timeType),
-      workScheduleApi.schema.USER_ID.equals(persons.sfsfID)
+      workScheduleApi.schema.EXTERNAL_CODE.equals(persons.workscheduleCode)
     )
     .execute({ destinationName: 'hcm-SFCPART001533_BASIC' });    
-    console.log("Output: WorkSchedules " +  temp.length);
-    console.log("Output Day Models: " +  temp[0].workScheduleDayModels[1].day);
-    console.log("Output Day Models: " +  temp[0].workScheduleDayModels[0].workScheduleExternalCode);
-    console.log("Output Day Models: " +  temp[0].workScheduleDayModels[0].mdfSystemEffectiveEndDate.day());
-    console.log("Output Day Models: " +  temp[0].workScheduleDayModels[0].mdfSystemEffectiveStartDate.date());
+    console.log("Output: WorkSchedules " +  temp[0].externalCode);
+    console.log("Output Day Models: " +  temp[0].workScheduleDayModels.length);
+    console.log(temp[0].startingDate);
+    console.log(from);
+    console.log(moment(from.diff(temp[0].startingDate)));
+    var initialdayID = (moment.duration(from.diff(temp[0].startingDate)).asDays()) % temp[0].workScheduleDayModels.length;
 
-    if (temp.length == 0) return [];/*
-    const WorkSchedules: Appointment[] = temp.map(WS => 
-      WS.workScheduleDayModels.map(DayModel => ({ // set data type to be the Appointment[]
-      ID: DayModel.entityUuid,
-      calendar_year: 2025,
-      end_date:  DayModel,
-      end_time: " ",
-      info: " ",
-      person_ID: DayModel.userId,
-      start_date: DayModel.startingDate.toString(),
-      start_time: " ",
-      status: "APPROVED",
-      title: " ",
-      type: "WS"
-      })          // reduce the created WS' Day Model lists into a list of appointments  
-    ).reduce( (WS) => [..WS, ]));*/
-    //console.log(temp)
-    return [];
+    console.log("Get Initial Day Id: " + initialdayID);
+
+    var currentMoment = {moment: from, dayid: initialdayID} ;
+    //console.log("SHocase " + temp[0].workScheduleDayModels.find((daymodel) => daymodel.day.toNumber() == 26).category)
+    var workSchedules: Appointment[] = [];
+    while(currentMoment.moment.isBefore(to)){
+      console.log("Current Iteration: " + currentMoment.dayid)
+      workSchedules.push(({
+        ID: temp[0].externalCode + currentMoment.moment.format("YYYY-MM-DD") + currentMoment.dayid,
+        calendar_year: 2025,
+        end_date: dateToString(currentMoment.moment), //"2025-03-21"
+        end_time: null,
+        info: " ",
+        person_ID: persons.ID,
+        start_date: dateToString(currentMoment.moment), //"2025-03-21"
+        start_time: null,
+        status: "APPROVED",
+        title: " ",
+        type: "WS-" + temp[0].workScheduleDayModels.find((daymodel) => daymodel.day.toNumber() == currentMoment.dayid).category
+      }))
+      currentMoment.moment.add(1, 'd');
+      if(currentMoment.dayid == temp[0].workScheduleDayModels.length) currentMoment.dayid = 1;
+      else currentMoment.dayid++;
+    }
+    
+    console.log("Show me the data " + workSchedules)
+    return workSchedules;
 }
+
 
 function readRemoteAppointments<T>(
   readFn: (person: Person, year: number) => Promise<T[]>,
