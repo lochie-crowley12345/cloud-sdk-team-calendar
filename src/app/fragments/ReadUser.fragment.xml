@@ -14,6 +14,8 @@
 			<Text text = "{userData>/location}"/>
 			<Label text="Work Schedule:" labelFor="workSchedule" />
 			<Text text = "{userData>/workScheduleCode}"/>
+			<Label text = "Position: " labelFor="Position"/>
+			<Text text = "{userData>/role}"/>
 		</l:content>
 	</l:VerticalLayout>
 </core:FragmentDefinition>

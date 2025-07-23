@@ -54,7 +54,7 @@ sap.ui.define([
     initModels: function () {
 //get logged user details      
       this._loadLoggedUserDetails();
-
+      
       var model = new JSONModel({
         startDate: this._getLastSaturday(),
         useremail: "",
@@ -136,6 +136,7 @@ sap.ui.define([
       // set message model
         oView.setModel(Messaging.getMessageModel(), "message");
         Messaging.registerObject(oView, true);
+        
       console.log("Next Stop")
       return jQuery.when(
         this.initPersons(model),
@@ -159,11 +160,12 @@ sap.ui.define([
             name: person.name,
             email: person.email,
             location: person.location,
-            workScheduleCode: person.workScheduleCode
+            workScheduleCode: person.workscheduleCode,
+            role: person.role
           };
           console.log("initPersons " + persons[0])
           console.log("initPersons " + persons[0].location)
-          console.log("initPersons " + persons[0].workScheduleCode)
+          console.log("initPersons " + persons[0].workscheduleCode)
           if (typeof model.getProperty("/people/" + person.ID + "/appointments") === "undefined") {
             personData.appointments = [];
           }
@@ -269,12 +271,74 @@ sap.ui.define([
             appointmentid: appointment.ID,
             start: converter.deserializeDate(appointment.start_date, appointment.start_time, true),
             end: converter.deserializeDate(appointment.end_date, appointment.end_time, false),
-            title: appointment.type === "AN_1000" ? "Annual Leave" : appointment.type === "WC_PL" ? "Personal Leave": appointment.type === "HOLD" ? appointment.title : appointment.type === "WS-PLANNED_HOURS"? "Rostered" : appointment.type === "WS-PLANNED_HOURS"? "Day Shift" : appointment.type === "6002"? "Fly In": appointment.type === "6003"? "Fly Out": appointment.type,
-            info: appointment.info === "Mismatch"? appointment.status : appointment.type === "WS"? "" : appointment.type === "6001"? "Planned Working Time": appointment.type === "Onsite Training"? "Recorded Working Time" : appointment.type === "AN_1000" ? "Recorded Working Time" : appointment.type === "WC_PL" ? "Recorded Working Time": appointment.type === "HOLD" ? "Public Holiday" : appointment.info,
-            customer: appointment.project,
-            pic: appointment.info === "Mismatch"? "sap-icon://alert" : appointment.type === "AN_1000" ? "sap-icon://general-leave-request" : appointment.type === "WS-PLANNED_HOURS" ? "sap-icon://timesheet": appointment.type === "AUS-ANNL" ? "sap-icon://general-leave-request" : appointment.type === "WS-OFF" ? "sap-icon://general-leave-request":appointment.type === "WORK"? "sap-icon://time-account": appointment.type === "6001"? "sap-icon://light-mode" : appointment.type === "FLY"? "sap-icon://flight": appointment.type === "6003"? "sap-icon://flight": appointment.type === "EDUC"? "sap-icon://user-settings" : "",
-            type: appointment.info === "Mismatch"? "Type20" : appointment.type === "AUS_ANN" ? "Type05" : appointment.type === "WC_PL" ? "Type05" : appointment.type === "HOLD" ? "Type09" : appointment.type === "WORK"? "Type02" : appointment.type === "6001"? "Type01" : appointment.type === "OVERTIME"? "Type03": appointment.type === "FLY"? "Type03": appointment.type === "EDUC"? "Type06" : "Type07",
-            tentative: appointment.type !== "Vacation" && appointment.status !== "APPROVED",
+            title:  
+                    appointment.type === "AUS-ANNL" ? "Annual Leave" : 
+                    appointment.type === "WC_PL" ? "Personal Leave": 
+                    appointment.type === "HOLD" ? appointment.title : 
+                    appointment.type === "WS-PLANNED_HOURS"? "Regular Shift" : 
+                    (appointment.type === "WS-DAY_MODEL" && appointment.info === "LATE_SHIFT_730") ? "Night Shift":
+                    (appointment.type === "WS-DAY_MODEL" && (appointment.info === "EARLY_SHIFT_830" || appointment.info === "CLT_0800-1700_NB" )) ? "Day Shift":
+                    appointment.type === "WS-OFF"? "OFF" : 
+                    appointment.type === "6003"? "Fly Out": 
+                    appointment.type === "ELV_TOILAtt"? "TOIL":
+                    appointment.type === "EDUC" ? "Training" :
+                    appointment.type === "PUBLICHOLIDAY"? "King's Birthday": 
+                    appointment.type === "OVERTIME"? "Overtime":
+                    appointment.type === "WORK"? "Work":
+                    appointment.type,
+            info: 
+                    appointment.info === "Mismatch"? appointment.status : 
+                    appointment.type === "WS-PLANNED_HOURS"? "Planned Hours" : 
+                    appointment.info === "CLT_0800-1700_NB"? "Planned Hours" : 
+                    appointment.info === "LATE_SHIFT_730"? "Planned Hours" :
+                    appointment.info === "EARLY_SHIFT_830"? "Planned Hours" :
+                    appointment.type === "WS-OFF"? "Planned Hours" : 
+                    appointment.type === "6001"? "Planned Working Time": 
+                    appointment.type === "Onsite Training"? "Recorded Time" : 
+                    appointment.type === "AUS-ANNL" ? "Absence Record" : 
+                    appointment.type === "WORK" ? "Recorded Time": 
+                    appointment.type === "OVERTIME" ? "Recorded Time": 
+                    appointment.type === "HOLD" ? "Public Holiday" : 
+                    appointment.type === "FLY" ? "Recorded Time" : 
+                    appointment.type === "ELV_TOILAtt"? "Recorded Time":
+                    appointment.type === "EDUC"? "Recorded Time":
+                    appointment.info,
+            customer: appointment.project,            
+            time_type: appointment.type,
+            pic: 
+                    appointment.info === "Mismatch"? "sap-icon://alert" : 
+                    appointment.type === "AN_1000" ? "sap-icon://general-leave-request" : 
+                    appointment.type === "WS-PLANNED_HOURS" ? "sap-icon://timesheet": 
+                    (appointment.type === "WS-DAY_MODEL" && appointment.info === "LATE_SHIFT_730") ? "sap-icon://dark-mode": 
+                    (appointment.type === "WS-DAY_MODEL" && (appointment.info === "EARLY_SHIFT_830" || appointment.info === "CLT_0800-1700_NB" )) ? "sap-icon://light-mode":
+                    appointment.type === "AUS-ANNL" ? "sap-icon://general-leave-request" : 
+                    appointment.type === "PUBLICHOLIDAY" ? "sap-icon://general-leave-request" : 
+                    appointment.type === "WS-OFF" ? "sap-icon://time-off":
+                    appointment.type === "WORK"? "sap-icon://time-entry-request": 
+                    appointment.type === "6001"? "sap-icon://light-mode" : 
+                    appointment.type === "FLY"? "sap-icon://flight": 
+                    appointment.type === "OVERTIME"? "sap-icon://time-overtime": 
+                    appointment.type === "EDUC"? "sap-icon://user-settings" : 
+                    appointment.type === "ELV_TOILAtt"? "sap-icon://timesheet" : "",
+                    
+            type: 
+                    appointment.info === "Mismatch"? "Type20" : 
+                    appointment.type === "AUS-ANNL" ? "Type05" : 
+                    appointment.type === "WORK" ? "Type03" : 
+                    appointment.type === "HOLD" ? "Type09" : 
+                    appointment.type === "WS-PLANNED_HOURS"? "Type01" : 
+                    appointment.type === "WS-OFF"? "Type08" : 
+                    (appointment.type === "WS-DAY_MODEL" && (appointment.info === "EARLY_SHIFT_830" || appointment.info === "CLT_0800-1700_NB" ))? "Type01": 
+                    (appointment.type === "WS-DAY_MODEL" && appointment.info === "LATE_SHIFT_730")? "Type06":
+                    appointment.type === "6001"? "Type01" : 
+                    appointment.type === "OVERTIME"? "Type03": 
+                    appointment.type === "FLY"? "Type03": 
+                    appointment.type === "EDUC"? "Type03" : 
+                    appointment.type === "ELV_TOILAtt"? "Type01":
+                    appointment.type === "PUBLICHOLIDAY"? "Type09":
+                    "Type07",
+            tentative: 
+                    appointment.type !== "Vacation" && appointment.status !== "APPROVED",
             code: appointment.type
           };
 
@@ -360,11 +424,11 @@ sap.ui.define([
             person_ID: appointment.person_ID,
             start: converter.deserializeDate(appointment.start_date, appointment.start_time, true),
             end: converter.deserializeDate(appointment.end_date, appointment.end_time, false),
-            title: appointment.type === "AN_1000" ? "Annual Leave" : appointment.type === "WC_PL" ? "Personal Leave": appointment.type === "HOLD" ? appointment.title : appointment.type === "WS"? "Normal Time" : appointment.type === "6001"? "Day Shift" : appointment.type === "6002"? "Fly In": appointment.type === "6003"? "Fly Out": appointment.type,
-            info: appointment.info === "Mismatch"? appointment.status : appointment.type === "WS"? "Recorded Working Time" : appointment.type === "6001"? "Planned Working Time": appointment.type === "Onsite Training"? "Recorded Working Time" : appointment.type === "AN_1000" ? "Recorded Working Time" : appointment.type === "WC_PL" ? "Recorded Working Time": appointment.type === "HOLD" ? "Public Holiday" : appointment.info,
+            title: appointment.type === "AN_1000" ? "Annual Leave" : appointment.type === "WC_PL" ? "Personal Leave": appointment.type === "HOLD" ? appointment.title : appointment.type === "WS"? "Normal Time" : appointment.type === "6001"? "Day Shift" : appointment.type === "6002"? "Fly In": appointment.type === "6003"? "Fly Out": appointment.type === "PUBLICHOLIDAY"? "Public Holiday": appointment.type,
+            info: appointment.info === "Mismatch"? appointment.status : appointment.type === "WS"? "Recorded Working Time" : appointment.type === "6001"? "Planned Working Time": appointment.type === "Onsite Training"? "Recorded Working Time" : appointment.type === "AN_1000" ? "Recorded Working Time" : appointment.type === "WC_PL" ? "Recorded Working Time": appointment.type === "HOLD" ? "Public Holiday" : appointment.type === "OVERTIME" ? "Overtime" :appointment.info,
             customer: appointment.project,
             pic: appointment.info === "Mismatch"? "sap-icon://alert" : appointment.type === "AN_1000" ? "sap-icon://general-leave-request" : appointment.type === "WC_PL" ? "sap-icon://general-leave-request": appointment.type === "HOLD" ? "sap-icon://general-leave-request" :appointment.type === "WS"? "sap-icon://time-account": appointment.type === "6001"? "sap-icon://light-mode" : appointment.type === "6002"? "sap-icon://flight": appointment.type === "6003"? "sap-icon://flight": appointment.type === "Onsite Training"? "sap-icon://user-settings" : "",
-            type: appointment.info === "Mismatch"? "Type20" : appointment.type === "AN_1000" ? "Type05" : appointment.type === "WC_PL" ? "Type05" : appointment.type === "HOLD" ? "Type09" : appointment.type === "WS"? "Type02" : appointment.type === "6001"? "Type01" : appointment.type === "6002"? "Type03": appointment.type === "6003"? "Type03": appointment.type === "Onsite Training"? "Type06" : "Type07",
+            type: appointment.info === "Mismatch"? "Type20" : appointment.type === "AN_1000" ? "Type05" : appointment.type === "WC_PL" ? "Type05" : appointment.type === "HOLD" ? "Type09" : appointment.type === "WS"? "Type02" : appointment.type === "6001"? "Type01" : appointment.type === "6002"? "Type03": appointment.type === "6003"? "Type03": appointment.type === "Onsite Training"? "Type06" : appointment.type === "EDUC" ? "Type03" : "Type07", 
             tentative: appointment.type !== "Vacation" && appointment.status !== "APPROVED",
             code: appointment.type
           };
@@ -374,7 +438,7 @@ sap.ui.define([
 
         model.setData({ people: modelData }, true);
         model.setData({ peopleByType: modelTypeData }, true);
-
+        
       });
     },
 
@@ -383,26 +447,27 @@ sap.ui.define([
       var dataByPerson = oCurModel.getData().people;
       var dataAppointments = oCurModel.getData().appointments;
       var dataAppointments2 = dataAppointments;
-      var oSelect = this.getView().byId("PlanningCalendarTeamSelect");
+      //var oSelect = this.getView().byId("PlanningCalendarTeamSelect");
       const wantedModel = this.getView().getModel("userModel");
       oCurModel.setData({ useremail: wantedModel.oData.value[0].email }, true);
       if (Object.keys(dataByPerson)) {
         Object.keys(dataByPerson).forEach(function (userid) {
           var sPersonName = dataByPerson[userid].name;
+          var sPosition = dataByPerson[userid].role/*
           oSelect.addItem(new Item({
             key: userid,
             text: sPersonName
-        }));
+        }));*/
     })};
     
-    var oMultiComboBox = this.byId("rowHeaderFilterTypes");
+    //var oMultiComboBox = this.byId("rowHeaderFilterTypes");
     var aItems = oCurModel.getProperty("/filterstype");
 
     // Extract keys from the items and set them as selected keys
     var aKeys = aItems.map(function (item) {
         return item.key;
     });
-    oMultiComboBox.setSelectedKeys(aKeys);
+    //oMultiComboBox.setSelectedKeys(aKeys);
 
     oCurModel.setProperty('/filteredRows', dataByPerson);
     oCurModel.setProperty('/filterBy', 'person');
@@ -415,7 +480,8 @@ sap.ui.define([
 				});
 				this.getView().setModel(oStateModel, "stateModel");
     
-    },
+        this.byId("PC1").removeAllSpecialDates();
+    },/*
 
 		selectChangeHandler: function(oEvent) {
 			this._sSelectedMember = oEvent.getParameter("selectedItem").getKey();
@@ -453,10 +519,10 @@ sap.ui.define([
             } 
         }
         oCurModel.setProperty("/filteredRows", dataByType);  
-      } */
+      } 
      }
      
-	 },
+	 },*/
 
     setAppointmentsToApprove: function () {
       var oCurModel = this.getView().getModel();
@@ -525,14 +591,21 @@ sap.ui.define([
 
       const startDate =  this._oDetailsPopover.getModel().getProperty(sAppointmentPath + "/start").toLocaleDateString();
       const formattedDate = startDate.split("/").reverse().join("-");
+      const condition = this._oDetailsPopover.getModel().getProperty(sAppointmentPath + "/type")
+      const userId = (sAppointmentPath.split('/')[2])
+      //MessageToast.show(condition);
+      if(condition == "Type06" || condition == "Type01" || condition == "Type08"){
+        window.open("https://salesdemo.successfactors.eu/sf/timeworkbench?selected_user=" + userId + "#/section/plannedWorkingTime");
+      }
+      else{
+        window.open("https://salesdemo.successfactors.eu/sf/timesheet#/timerecords/" + userId + "/" + formattedDate);
+      }
 
-      console.log(formattedDate);
-
-
-        window.open("https://salesdemo.successfactors.eu/sf/timesheet#/timerecords/" + (sAppointmentPath.split('/')[2]) + "/" + formattedDate);
+        
     },
 
     handleAppointmentCreate: function () {
+      /*
       var oFrag = sap.ui.core.Fragment,
         oDateTimePickerStart,
         oDateTimePickerEnd,
@@ -558,10 +631,10 @@ sap.ui.define([
         oDateTimePickerEnd,
         oBeginButton
       );
-      this.oNewAppointmentDialog.open();
+      this.oNewAppointmentDialog.open();*/
     },
 
-    handleAppointmentAddWithContext: function (oEvent) {
+    handleAppointmentAddWithContext: function (oEvent) {/*
       var oFrag = sap.ui.core.Fragment,
         currentRow,
         sPersonName,
@@ -605,9 +678,23 @@ sap.ui.define([
         oDateTimePickerEnd,
         oBeginButton
       );
-      this.oNewAppointmentDialog.open();
+      this.oNewAppointmentDialog.open();*/
     },
-
+    onToggleHeight: function (oEvent) {
+ 
+      var oPlanningCalendar = this.getView().byId("PC1");
+ 
+      var currentHeight = oPlanningCalendar.getAppointmentHeight();
+      var temp = oPlanningCalendar.appointment;
+      
+      console.log(temp);
+ 
+      var newHeight = (currentHeight === sap.ui.unified.CalendarAppointmentHeight.HalfSize)
+        ? sap.ui.unified.CalendarAppointmentHeight.FullSize
+        : sap.ui.unified.CalendarAppointmentHeight.HalfSize;
+ 
+      oPlanningCalendar.setAppointmentHeight(newHeight);
+    },
     _validateDateTimePicker: function (sValue, oDateTimePicker) {
       if (sValue === "") {
         oDateTimePicker.setValueState("Error");
@@ -663,7 +750,7 @@ sap.ui.define([
       );
     },
 
-    _createDialog: function () {
+    _createDialog: function () { /*
       var oFrag = sap.ui.core.Fragment,
         that = this,
         oStartDate,
@@ -739,7 +826,7 @@ sap.ui.define([
 
         that.oNewAppointmentDialog.addStyleClass("sapUiContentPadding");
         this.getView().addDependent(that.oNewAppointmentDialog);
-      }
+      }*/
     },
 
     _handleSingleAppointment: function (oAppointment) {
@@ -921,8 +1008,15 @@ sap.ui.define([
 
       //MessageToast.show("rowHeaderPressed on row: " + row.getId());
      
-        this._createUserDialog(person);
-        console.log(oModel);
+        this._createUserDialog();
+        console.log("Full Model: " + oModel);
+        console.log("Full Row: " + oCalendarRow);
+        console.log("FrontEnd: " + person.name);
+        console.log("FrontEnd: " + person.userid);
+        console.log("FrontEnd: " + person.location);
+        console.log("FrontEnd: " + person.workScheduleCode);
+        console.log("FrontEnd: " + person.role);
+
         //oSelect = this.oUserModelDialog.getContent()[0].getContent()[0].setModel(oModel);//[0].getContent()[1];
         
 
@@ -941,7 +1035,8 @@ sap.ui.define([
           name: person.name,
           userId: person.userid,
           location: person.location,
-          workScheduleCode: person.workScheduleCode
+          workScheduleCode: person.workScheduleCode,
+          role: person.role
         })
         console.log("Data " + person);
         this.oUserModelDialog.setModel(PersonsModel, "userData");
@@ -951,7 +1046,7 @@ sap.ui.define([
         
         this.oUserModelDialog.open();
     },
-    _createUserDialog: function (person){
+    _createUserDialog: function (){
       var oFrag = sap.ui.core.Fragment,
         that = this,
         oUserModelDialogFragName;
@@ -965,7 +1060,7 @@ sap.ui.define([
               text: "View Profile",
               enabled: true,
               press: function(){
-                window.open("https://salesdemo.successfactors.eu/sf/liveprofile?bplte_company=SFCPART001533&selecteduser=" + person.userid)
+                that._viewProfile(that.oUserModelDialog.getModel("userData").getProperty("/userId"));
               }
               }),
             endButton: new Button({
@@ -979,6 +1074,9 @@ sap.ui.define([
           this.getView().addDependent(that.oUserModelDialog);
         }
 
+    },
+    _viewProfile: function(userId){
+      window.open("https://salesdemo.successfactors.eu/sf/liveprofile?bplte_company=SFCPART001533&selecteduser=" + userId);
     },
 
     async onMessagePopoverPress(oEvent) {
@@ -1014,13 +1112,13 @@ sap.ui.define([
 
 //2.      
      window.location.reload();
-    },
+    },/*
 
     onRowHeaderFilterChange: function (oEvent) {
       var sSelectedKey = oEvent.getParameter("selectedItem").getKey();
       this._updateRowHeaders(sSelectedKey);
-  },
-
+  },*/
+    /*
     onRowHeaderFilterTypeChange: function (oEvent) {
       var oModel = this.getView().getModel();
       var aSelectedKeys = this.byId("rowHeaderFilterTypes").getSelectedKeys();
@@ -1083,7 +1181,7 @@ sap.ui.define([
         oModel.setProperty("/Clone", byType);
         this.disableAndResetDropdown();
       }
-   },
+   },*/
 
   enableDropdown: function () {
     var oDropdown = this.byId("PlanningCalendarTeamSelect");
@@ -1134,6 +1232,16 @@ sap.ui.define([
 				}
 			});
 		},
+    onViewDetailsPress(){
+      var oPlanningCalendar = this.getView().byId("PC1");
+      if (oPlanningCalendar && oPlanningCalendar.setWorkWeekConfig) {
+        oPC.setWorkWeekConfig({}); // Removes weekend highlighting
+      } else {
+        console.log("show me:" + this.byId("PC1").getLayoutData());
+        console.warn("setWorkWeekConfig is not available on this control");
+      }
+      //oPlanningCalendar.setWorkWeekConfig({});
+    },
     
     onDownloadCalendarToExcel: function () {
       // Get a reference to the PlanningCalendar

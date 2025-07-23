@@ -1,17 +1,82 @@
 <mvc:View controllerName="com.sap.timesheet.controller.Main" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
 	displayBlock="true" xmlns="sap.m" xmlns:unified="sap.ui.unified" xmlns:core="sap.ui.core" xmlns:f="sap.f" xmlns:u="sap.uxap"
-	xmlns:l="sap.ui.layout">
+	xmlns:l="sap.ui.layout" xmlns:fb="sap.ui.comp.filterbar" xmlns:sfb="sap.ui.comp.smartfilterbar">
 	<App id="idAppControl">
+		
 		<Page>
-<!-- rows="{/people}" -->
+			<customHeader>
+			<f:ShellBar
+					id="sapFShellBarSample"
+					showCopilot="false"
+					showSearch="false"
+					showMenuButton="false"
+					showNavButton="false"
+					showNotifications="false"
+					showProductSwitcher="false"
+					productSwitcherPressed="fnOpen"
+					class="customShellBar"
+					homeIcon="./images/CrowdSchedule 2.png"
+					avatarPressed=".onAvatarPress"
+					homeIconTooltip="Elevate Logo">
+					<f:profile>
+					<Avatar id="avatarButtonId" src="{loggedUser>/photo}" press=".onAvatarPress" tooltip="User Profile" />
+				</f:profile>
+			</f:ShellBar>
+			</customHeader>
+				
+			<Panel headerText="" class="framePanel">
+						
+					<!--/Panel-->
+			
 			<VBox class="sapUiSmallMargin">
+			
 				<PlanningCalendar viewKey="F" id="PC1" startDate="{path: '/startDate'}" rows="{path: '/filteredRows'}"
 					appointmentsVisualization="Filled" appointmentSelect="handleAppointmentSelect" showEmptyIntervalHeaders="false" 
-					intervalSelect="handleAppointmentAddWithContext" showWeekNumbers="true" rowHeaderPress="handleRowHeaderPress"> 
+					intervalSelect="handleAppointmentAddWithContext" showWeekNumbers="true" rowHeaderPress="handleRowHeaderPress" > 
+					
+					
 					<toolbarContent>
-						<Title text="{i18n>teamCalendar}" titleStyle="H4"/>
+						
 						<ToolbarSpacer/>
-						<Label labelFor="LblFilterBy" text="Filter By: "/>
+						<l:Grid
+							defaultSpan="L6 M6 S12"
+							hSpacing="1"
+							vSpacing="1"
+							width="100%"
+							containerQuery="true">
+							
+							<HBox fitContainer="true" alignItems="Center" justifyContent="Start" class="siteSelectionHBox">
+								<Label text="Site :" labelFor="siteDropdown" />
+								<HBox width="10px" />
+								<ComboBox id="siteDropdown" width="210px" placeholder="Select a site" items="HRC_Office"
+								required="true" selectionChange="onSiteSelectionChange" selectedKey="SYD_Office">
+									<core:Item key="SYD_Office" text="HRC Elevate NSW(8510-0001)" />
+									<core:Item key="BRI_Office" text="Brisbane Office (8510-0002)" />
+									<core:Item key="MEL_Office" text="Melbourne Office (8510-0003)" />
+									<core:Item key="PER_Office" text="Perth Office (8510-0004)" />
+									<core:Item key="DAR_Office" text="Darwin Office (8510-0005)" />
+									<core:Item key="ADE_Office" text="Adelaide Office (8510-0006)" />
+								</ComboBox>
+								<HBox width="10px" />
+								<Label text="Crew :" labelFor="crewMultiComboBox" />
+								<MultiComboBox id="crewMultiComboBox" width="110px" placeholder="Select Crew(s)"
+								items="Crew_A" selectedKeys="Crew_A">
+									<core:ListItem key="Crew_A" text="Crew A" />
+									<core:ListItem key="Crew_B" text="Crew B" />
+								</MultiComboBox>
+								<HBox width="30px" />
+								<Button type="Emphasized"
+									text="Go"
+									icon="sap-icon://offsite-work"
+									press="onViewDetailsPress"
+									ariaDescribedBy="acceptButtonDescription genericButtonDescription">
+								<layoutData>
+									<FlexItemData growFactor="1" />
+								</layoutData>
+								</Button>
+							</HBox>
+						</l:Grid>
+						<!--Label labelFor="LblFilterBy" text="Filter By: "/>
 						<Select id="rowHeaderFilter" items="{path: '/filters'}" change=".onRowHeaderFilterChange">
     						<core:ListItem key="{key}" text="{text}" />
 						</Select>
@@ -23,9 +88,22 @@
 						<Select id="PlanningCalendarTeamSelect" change=".selectChangeHandler">
 							<core:Item key="Team" text="Crew A"/>
 						</Select>
-							<Button icon="sap-icon://refresh" press="onRefreshPress" tooltip="Refresh"/>
-							<Button id="PlanningCalendarLegendButton" icon="sap-icon://legend" press=".openLegend" tooltip="Legend" ariaHasPopup="Dialog"/>
-							<Button id="Download" icon="sap-icon://download" press=".onDownloadCalendarToExcel" />
+						<MultiComboBox id="rowHeaderFilterTypes" items="{path: '/filterstype'}" width="200px" selectionChange=".onRowHeaderFilterTypeChange">
+    						<core:Item key="{key}" text="{text}" />
+						</MultiComboBox>
+						<Select id="PlanningCalendarTeamSelect" change=".selectChangeHandler">
+							<core:Item key="Team" text="Crew A"/>
+						</Select-->
+							<Button id="filterButton" icon="sap-icon://filter" press="onOpenFilterDialog" class="filter-button-with-badge">
+                                <customData>
+                                    <core:CustomData key="badge" value="0" writeToDom="true"/>
+                                </customData>
+                            </Button>
+                            <ToggleButton icon="sap-icon://increase-line-height" tooltip="Adjust Height" pressed="false" press="onToggleHeight"/>
+                            <ToggleButton icon="sap-icon://alert" pressed="false" tooltip="Exceptions" press="onToggleFilter"/>
+                            <Button id="fullScreenButton" icon="sap-icon://full-screen" press="onToggleFullScreen"/>
+                            <Button id="PlanningCalendarLegendButton" icon="sap-icon://legend" press=".openLegend" tooltip="Legend" ariaHasPopup="Dialog"/>
+                            <Button id="Download" icon="sap-icon://download" press=".onDownloadCalendarToExcel" />
 					</toolbarContent>
 					<views>
  						<PlanningCalendarView
@@ -60,23 +138,23 @@
 							description="Month"
 							intervalsS="1"
 							intervalsM="31"
-							intervalsL="31">
+							intervalsL="31"
+							>
 						</PlanningCalendarView>
 					</views>
-
 					<rows>
-						<PlanningCalendarRow icon="{pic}" title="{name}" text="{sfsfID}" class="rowHeaderColorRed" nonWorkingDays="" appointments="{path : 'appointments', templateShareable: true}">
+						<PlanningCalendarRow icon="{pic}" title="{name}" text="{role}" class="rowHeaderColorRed" nonWorkingDays="" appointments="{path : 'appointments', templateShareable: true}">
 <!-- 							enableAppointmentsDragAndDrop="true" appointmentDrop="handleAppointmentDrop"
 							enableAppointmentsResize="true" appointmentResize="handleAppointmentResize" appointmentDragEnter="handleAppointmentDragEnter"> -->
 							<appointments>
-								<unified:CalendarAppointment startDate="{start}" endDate="{end}" icon="{pic}" title="{title}" text="{info}" type="{type}"
+								<unified:CalendarAppointment startDate="{start}" endDate="{end}" icon="{pic}" title="{title}" text="{info}" type="{type}" 
 									tentative="{tentative}" tooltip="{info}" ></unified:CalendarAppointment>
 							</appointments>
 						</PlanningCalendarRow>
 					</rows>
 				</PlanningCalendar>
 			</VBox>
-
+		</Panel>
 		<footer>
 			<Toolbar
 				id="otbFooter">

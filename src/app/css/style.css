@@ -38,5 +38,18 @@
 .rowHeaderColorBlue .sapMPCHead > .sapMPCHeadContent {
   background-color: #BBDEFB; /* Light Blue */
 }
+.customShellBar .sapUshellShellHeadItm.sapUshellShellHeadItmHome {
+  width: 120px !important;
+  height: 120px !important;
+}
+ 
+.customShellBar .sapUshellShellHeadItm.sapUshellShellHeadItmHome .sapUiIcon {
+  font-size: 50px !important;
+}
+
+.sapMPCNonWorkingRow,
+.sapMPCNonWorkingCell{
+  background-color: transparent !important;
+}
 
 /* Add more color classes as needed */

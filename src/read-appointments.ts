@@ -81,7 +81,7 @@ export async function readSfsfAppointmentsByPerson(
 export async function readWorkSchedulewithPlannedHrs(persons: Person): Promise<Appointment[]> {
   const { workScheduleApi, workScheduleDayModelAssignmentApi} = ecTimeOffService();
   const from = moment.utc(`2025-03-08`);
-  const to = moment.utc(`2025-06-30`);
+  const to = moment.utc(`2025-12-31`);
   console.log("Testinggg?: "+ persons.workscheduleCode)
   
   let temp=  await workScheduleApi
@@ -111,7 +111,7 @@ export async function readWorkSchedulewithPlannedHrs(persons: Person): Promise<A
     console.log(temp[0].startingDate);
     console.log(from);
     console.log(moment(from.diff(temp[0].startingDate)));
-    var initialdayID = (moment.duration(from.diff(temp[0].startingDate)).asDays()) % temp[0].workScheduleDayModels.length;
+    var initialdayID = ((moment.duration(from.diff(temp[0].startingDate)).asDays()) % temp[0].workScheduleDayModels.length)+1;
 
     console.log("Get Initial Day Id: " + initialdayID);
 
@@ -124,11 +124,14 @@ export async function readWorkSchedulewithPlannedHrs(persons: Person): Promise<A
         ID: temp[0].externalCode + currentMoment.moment.format("YYYY-MM-DD") + currentMoment.dayid,
         calendar_year: 2025,
         end_date: dateToString(currentMoment.moment), //"2025-03-21"
-        end_time: null,
-        info: " ",
+        end_time: temp[0].workScheduleDayModels.find((daymodel) => daymodel.day.toNumber() == currentMoment.dayid).category != "OFF" && persons.ID == "3000"? 
+                  "17:00:00": null,
+        info: temp[0].workScheduleDayModels.find((daymodel) => daymodel.day.toNumber() == currentMoment.dayid).dayModel? 
+              temp[0].workScheduleDayModels.find((daymodel) => daymodel.day.toNumber() == currentMoment.dayid).dayModel : " ",
         person_ID: persons.ID,
         start_date: dateToString(currentMoment.moment), //"2025-03-21"
-        start_time: null,
+        start_time: temp[0].workScheduleDayModels.find((daymodel) => daymodel.day.toNumber() == currentMoment.dayid).category != "OFF" && persons.ID == "3000"? 
+                     "08:00:00": null,
         status: "APPROVED",
         title: " ",
         type: "WS-" + temp[0].workScheduleDayModels.find((daymodel) => daymodel.day.toNumber() == currentMoment.dayid).category
@@ -136,6 +139,51 @@ export async function readWorkSchedulewithPlannedHrs(persons: Person): Promise<A
       currentMoment.moment.add(1, 'd');
       if(currentMoment.dayid == temp[0].workScheduleDayModels.length) currentMoment.dayid = 1;
       else currentMoment.dayid++;
+    }
+    workSchedules.push(({
+      ID: "publicholiday-kingsbirthday" + Math.random().toString() ,
+      calendar_year: 2025,
+      end_date: "2025-06-09", //
+      end_time: null,
+      info: "Public Holiday",
+      person_ID: persons.ID,
+      start_date: "2025-06-09", //"2025-03-21"
+      start_time: null,
+      status: "APPROVED",
+      title: "",
+      type: "PUBLICHOLIDAY" 
+    }))
+    if(persons.ID == "3000"){
+      workSchedules.push(({
+        ID: "TEMPORARYTIME-Demo" + Math.random().toString() ,
+        calendar_year: 2025,
+        end_date: "2025-05-31", //
+        end_time: "05:00:00",
+        info: "LATE_SHIFT_730",
+        person_ID: persons.ID,
+        start_date: "2025-05-30", //"2025-03-21"
+        start_time: "22:00:00",
+        status: "APPROVED",
+        title: "",
+        type: "WS-DAY_MODEL" 
+      }))
+      console.log(workSchedules.length)
+      workSchedules = workSchedules.filter(workSchedule => !(workSchedule.start_date === "2025-06-09" && workSchedule.type === "WS-DAY_MODEL"));
+      workSchedules = workSchedules.filter(workSchedule => !(workSchedule.start_date === "2025-06-10" && workSchedule.type === "WS-DAY_MODEL"));
+      workSchedules.push(({
+        ID: "TEMPORARYTIME-Demo" + Math.random().toString() ,
+        calendar_year: 2025,
+        end_date: "2025-06-10", //
+        end_time: "05:00:00",
+        info: "LATE_SHIFT_730",
+        person_ID: persons.ID,
+        start_date: "2025-06-09", //"2025-03-21"
+        start_time: "22:00:00",
+        status: "APPROVED",
+        title: "",
+        type: "WS-DAY_MODEL" 
+      }))
+      console.log(workSchedules.length)
     }
     
     console.log("Show me the data " + workSchedules)

@@ -12,7 +12,7 @@ sap.ui.define([
 
   return {
     getPersons: function () { //?$filter=hlevel gt 1
-      console.log("Am I being called?")
+      //console.log("Am I being called?")
       return http.get(baseUrl + "/Person").then(function (response) {
         console.log("Response Test: " + converter.getValue(response))
         return response.hasOwnProperty("d")

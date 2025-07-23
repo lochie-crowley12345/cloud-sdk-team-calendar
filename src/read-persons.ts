@@ -3,6 +3,7 @@ import { User, pltUserManagementService } from './generated/plt-user-management-
 import moment from 'moment';
 import { DefaultDeSerializers } from '@sap-cloud-sdk/odata-v2';
 import { elevateJobInfoService } from './generated/elevate-job-info-service';
+import { EmpJobApi } from './generated/elevate-job-info-service/EmpJobApi';
 const { or, and } = require('@sap-cloud-sdk/odata-v2');
 
 export async function readPersons(srv: any): Promise<Person[]> {
@@ -36,9 +37,32 @@ export async function readPersons(srv: any): Promise<Person[]> {
               empJobApi.schema.USER_ID.equals("3001"),
               empJobApi.schema.USER_ID.equals("3002"),
               empJobApi.schema.USER_ID.equals("3004")))
-  // and(       userApi.schema.LOCATION.equals(site),       or(         userApi.schema.CUSTOM_06.equals('2A'),         userApi.schema.CUSTOM_06.equals('2B') ) ) )
   .execute({ destinationName: 'hcm-SFCPART001533_BASIC'});
+  // and(       userApi.schema.LOCATION.equals(site),       or(         userApi.schema.CUSTOM_06.equals('2A'),         userApi.schema.CUSTOM_06.equals('2B') ) ) )
+  
 
+  var PositionMapping = [({
+    ID: "3002181",
+    PositionTitle: "Site Manager (3002181)"
+  }),
+  ({
+    ID: "3002179",
+    PositionTitle: "Utility Manager (3002179)"
+  }),
+  ({
+    ID: "3002183",
+    PositionTitle: "All Round Operator (3002183)"
+  }),
+  ({
+    ID: "3002185",
+    PositionTitle: "Dump Truck Operator (3002185)"
+  }),
+  ({
+    ID: "3002134",
+    PositionTitle: "Project Manager (3002134)"
+  }),
+
+]
   console.log("Empjob: " + userempjob);
   console.log("Empjob: " + userempjob.find((element) => element.userId == "3001").workscheduleCode);
   // Map the API response to the SFLoggedUser interface for multiple users
@@ -47,7 +71,7 @@ export async function readPersons(srv: any): Promise<Person[]> {
     name: user.firstName + " " + user.lastName,
     username: user.username,
     location: user.location,
-    role: userempjob.find((element) => element.userId == user.userId).position,
+    role: PositionMapping.find(posid => (userempjob.find((element) => element.userId == user.userId).position) == posid.ID).PositionTitle,
     sfsfID: user.userId,
     hLevel: 1,
     workscheduleCode: userempjob.find((element) => element.userId == user.userId).workscheduleCode

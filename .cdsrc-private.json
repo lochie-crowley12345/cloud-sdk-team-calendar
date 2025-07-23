@@ -22,7 +22,7 @@
           "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
           "org": "HR Crowd Pty Ltd_demo-5ld47ydi",
           "space": "dev",
-          "instance": "my-destination",
+          "instance": "my-destination-internal",
           "key": "destination",
           "resolved": false
         },
