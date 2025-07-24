@@ -106,20 +106,13 @@ export async function readWorkSchedulewithPlannedHrs(persons: Person): Promise<A
       workScheduleApi.schema.EXTERNAL_CODE.equals(persons.workscheduleCode)
     )
     .execute({ destinationName: 'hcm-SFCPART001533_BASIC' });    
-    console.log("Output: WorkSchedules " +  temp[0].externalCode);
-    console.log("Output Day Models: " +  temp[0].workScheduleDayModels.length);
-    console.log(temp[0].startingDate);
-    console.log(from);
-    console.log(moment(from.diff(temp[0].startingDate)));
     var initialdayID = ((moment.duration(from.diff(temp[0].startingDate)).asDays()) % temp[0].workScheduleDayModels.length)+1;
 
-    console.log("Get Initial Day Id: " + initialdayID);
 
     var currentMoment = {moment: from, dayid: initialdayID} ;
     //console.log("SHocase " + temp[0].workScheduleDayModels.find((daymodel) => daymodel.day.toNumber() == 26).category)
     var workSchedules: Appointment[] = [];
     while(currentMoment.moment.isBefore(to)){
-      console.log("Current Iteration: " + currentMoment.dayid)
       workSchedules.push(({
         ID: temp[0].externalCode + currentMoment.moment.format("YYYY-MM-DD") + currentMoment.dayid,
         calendar_year: 2025,
@@ -141,13 +134,13 @@ export async function readWorkSchedulewithPlannedHrs(persons: Person): Promise<A
       else currentMoment.dayid++;
     }
     workSchedules.push(({
-      ID: "publicholiday-kingsbirthday" + Math.random().toString() ,
+      ID: "publicholiday-ekkashowday" + Math.random().toString() ,
       calendar_year: 2025,
-      end_date: "2025-06-09", //
+      end_date: "2025-08-13", //
       end_time: null,
       info: "Public Holiday",
       person_ID: persons.ID,
-      start_date: "2025-06-09", //"2025-03-21"
+      start_date: "2025-08-13", //"2025-03-21"
       start_time: null,
       status: "APPROVED",
       title: "",
@@ -157,11 +150,11 @@ export async function readWorkSchedulewithPlannedHrs(persons: Person): Promise<A
       workSchedules.push(({
         ID: "TEMPORARYTIME-Demo" + Math.random().toString() ,
         calendar_year: 2025,
-        end_date: "2025-05-31", //
+        end_date: "2025-08-01", //
         end_time: "05:00:00",
         info: "LATE_SHIFT_730",
         person_ID: persons.ID,
-        start_date: "2025-05-30", //"2025-03-21"
+        start_date: "2025-07-31", //"2025-03-21"
         start_time: "22:00:00",
         status: "APPROVED",
         title: "",
@@ -173,11 +166,11 @@ export async function readWorkSchedulewithPlannedHrs(persons: Person): Promise<A
       workSchedules.push(({
         ID: "TEMPORARYTIME-Demo" + Math.random().toString() ,
         calendar_year: 2025,
-        end_date: "2025-06-10", //
+        end_date: "2025-07-31", //
         end_time: "05:00:00",
         info: "LATE_SHIFT_730",
         person_ID: persons.ID,
-        start_date: "2025-06-09", //"2025-03-21"
+        start_date: "2025-07-30", //"2025-03-21"
         start_time: "22:00:00",
         status: "APPROVED",
         title: "",

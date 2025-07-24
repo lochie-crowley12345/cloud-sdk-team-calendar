@@ -282,7 +282,7 @@ sap.ui.define([
                     appointment.type === "6003"? "Fly Out": 
                     appointment.type === "ELV_TOILAtt"? "TOIL":
                     appointment.type === "EDUC" ? "Training" :
-                    appointment.type === "PUBLICHOLIDAY"? "King's Birthday": 
+                    appointment.type === "PUBLICHOLIDAY"? "Ekka Showday": 
                     appointment.type === "OVERTIME"? "Overtime":
                     appointment.type === "WORK"? "Work":
                     appointment.type,
