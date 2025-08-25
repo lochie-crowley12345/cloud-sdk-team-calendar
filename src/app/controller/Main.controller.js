@@ -147,6 +147,7 @@ sap.ui.define([
     },
 
   initPersons: function (model) {
+    
       var imageMapping = {
         1: "/images/Adrian_Butler.png",
         2: "/images/Alan_Gordon.png",
@@ -319,7 +320,7 @@ sap.ui.define([
                     appointment.type === "FLY"? "sap-icon://flight": 
                     appointment.type === "OVERTIME"? "sap-icon://time-overtime": 
                     appointment.type === "EDUC"? "sap-icon://user-settings" : 
-                    appointment.type === "ELV_TOILAtt"? "sap-icon://timesheet" : "",
+                    appointment.type === "ELV_TOILAtt"? "sap-icon://time-entry-request" : "",
                     
             type: 
                     appointment.info === "Mismatch"? "Type20" : 
@@ -334,7 +335,7 @@ sap.ui.define([
                     appointment.type === "OVERTIME"? "Type03": 
                     appointment.type === "FLY"? "Type03": 
                     appointment.type === "EDUC"? "Type03" : 
-                    appointment.type === "ELV_TOILAtt"? "Type01":
+                    appointment.type === "ELV_TOILAtt"? "Type03":
                     appointment.type === "PUBLICHOLIDAY"? "Type09":
                     "Type07",
             tentative: 

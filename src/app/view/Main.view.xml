@@ -40,12 +40,12 @@
 						<ToolbarSpacer/>
 						<l:Grid
 							defaultSpan="L6 M6 S12"
-							hSpacing="1"
-							vSpacing="1"
+							hSpacing="10"
+							vSpacing="10"
 							width="100%"
 							containerQuery="true">
 							
-							<HBox fitContainer="true" alignItems="Center" justifyContent="Start" class="siteSelectionHBox">
+							<HBox fitContainer="true" alignItems="Center" justifyContent="Start" class="siteSelectionHBox" >
 								<Label text="Site :" labelFor="siteDropdown" />
 								<HBox width="10px" />
 								<ComboBox id="siteDropdown" width="210px" placeholder="Select a site" items="HRC_Office"
@@ -60,7 +60,7 @@
 								<HBox width="10px" />
 								<Label text="Crew :" labelFor="crewMultiComboBox" />
 								<MultiComboBox id="crewMultiComboBox" width="110px" placeholder="Select Crew(s)"
-								items="Crew_A" selectedKeys="Crew_A">
+								items="Crew_A" selectedKeys="Crew_A" >
 									<core:ListItem key="Crew_A" text="Crew A" />
 									<core:ListItem key="Crew_B" text="Crew B" />
 								</MultiComboBox>

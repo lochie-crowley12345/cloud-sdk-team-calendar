@@ -9,6 +9,7 @@ import { readPersons } from './read-persons';
 import { transformSfsfAppointment } from './util/appointment-transformation';
 import { convertCompilerOptionsFromJson } from 'typescript';
 import { dateToString } from './util/time-util';
+import { executeHttpRequest } from '@sap-cloud-sdk/http-client';
 
 export async function readAppointments(
   year: number,

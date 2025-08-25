@@ -4,12 +4,30 @@ import moment from 'moment';
 import { DefaultDeSerializers } from '@sap-cloud-sdk/odata-v2';
 import { elevateJobInfoService } from './generated/elevate-job-info-service';
 import { EmpJobApi } from './generated/elevate-job-info-service/EmpJobApi';
+import { executeHttpRequest } from '@sap-cloud-sdk/http-client';
 const { or, and } = require('@sap-cloud-sdk/odata-v2');
+import { serviceToken } from '@sap-cloud-sdk/connectivity';
 
 export async function readPersons(srv: any): Promise<Person[]> {
   
   const { userApi} = pltUserManagementService();
   const { empJobApi} = elevateJobInfoService();
+  /* var test = await serviceToken('');
+  console.log('svcjwt: ', test)
+  try {
+      const response = await executeHttpRequest(
+          { destinationName: 'lcrowley' }, // Or directly provide URL/credentials
+          {
+              method: 'GET', // Or 'POST', 'PUT', 'DELETE'
+              url: 'odatav4/timemanagement/timeeventprocessing/clockinclockout/v1/timeevents?'
+          }
+      );
+      console.log('Response:', response.data);
+      return response.data;
+  } catch (error) {
+      console.error('Error executing HTTP request:', error);
+      throw error;
+  }*/ 
   // Step 1: Fetch Users (without expand)
   let users: User<DefaultDeSerializers>[] = await userApi
     .requestBuilder()
